@@ -13,32 +13,11 @@ import {
 } from './styles'
 import { SearchIcon } from '../icons'
 import { HeaderContext } from '@/context/navigation/header'
+import { bottomLinks } from '@/utils/mocks/header'
 
 const Header: React.FC = () => {
   const { setVisible } = useContext(HeaderContext)
 
-  const bottomLinks = [
-    {
-      title: 'Home',
-      ref: '/'
-    },
-    {
-      title: 'Receitas',
-      ref: '/revenues'
-    },
-    {
-      title: 'Dúvidas',
-      ref: ''
-    },
-    {
-      title: 'Tenho intolerância a Lactose?',
-      ref: ''
-    },
-    {
-      title: 'Onde comer?',
-      ref: ''
-    }
-  ]
   const openSideBar = () => {
     setVisible(true)
   }

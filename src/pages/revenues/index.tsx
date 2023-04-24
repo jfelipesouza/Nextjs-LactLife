@@ -24,6 +24,7 @@ type ICategory = {
 type StaticRevenueScreenProps = {
   categories: ICategory[]
 }
+
 const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({ categories }) => {
   const [category, setCatgory] = useState<ICategory[]>([])
   const [lastCategory, setLastCategory] = useState<number | null>(null)
@@ -132,7 +133,10 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({ categories }) => {
               <CardImage src={data.image.base64} />
               <CardInformation>
                 <h4 className="foodName">{data.foodName}</h4>
-                <Link className="link" href={`/revenue/[${data.id}]`}>
+                <Link
+                  className="link"
+                  href={`/revenues/informations/${data.id}`}
+                >
                   Ver receita
                 </Link>
               </CardInformation>

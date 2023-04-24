@@ -6,9 +6,9 @@ export const HeroSection = styled.section`
   width: 100vw;
   min-height: calc(100vh - 8rem);
   display: flex;
-  margin-top: 8rem;
+  margin-top: 7.9rem;
   align-items: center;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent);
 
   #banner {
     position: absolute;

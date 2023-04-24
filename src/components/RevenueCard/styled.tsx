@@ -68,7 +68,7 @@ export const CardInformation = styled.div`
     padding-bottom: 1.5rem;
     z-index: 9;
     background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
-
+    border-radius: 1rem;
     .foodName {
       color: white;
       font-size: 1.5rem;

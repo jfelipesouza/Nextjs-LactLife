@@ -7,7 +7,6 @@ export const Container = styled.header`
   position: absolute;
   width: 100vw;
   top: 0;
-  box-shadow: 2px 3px 5px #0000007f;
 `
 
 export const NavBar = styled.nav`
@@ -95,14 +94,18 @@ export const SearchBar = styled.div`
 export const SearchInput = styled.input`
   height: 3.125rem;
   width: 100%;
+  border: none;
   border-radius: 0.5rem;
-  border: solid 2px white;
   padding-left: 0.5rem;
   padding-right: 2rem;
   font-size: 1.125rem;
 
   ::placeholder {
     font-weight: 700;
+  }
+
+  :select {
+    border: all 2s ${({ theme }) => theme.colors.primary};
   }
 `
 

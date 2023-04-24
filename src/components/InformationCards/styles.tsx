@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 200px;
   background-color: ${({ theme }) => theme.colors.gray};
   border-radius: 5px;
-  box-shadow: 1px 2px 3px #0000007f;
+
   padding: 2rem 1rem;
   display: flex;
   align-items: flex-start;
@@ -15,7 +15,6 @@ export const Container = styled.div`
   transition: all 0.2s linear;
   :hover {
     transform: translateY(-5px);
-    box-shadow: 2px 6px 9px #0000007f;
   }
 `
 
