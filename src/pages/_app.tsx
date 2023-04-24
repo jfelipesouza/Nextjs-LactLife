@@ -1,14 +1,18 @@
 import React from 'react'
 import { AppProps } from 'next/app'
-import { GlobalStyles } from '@/styles/global'
 import { ThemeProvider } from 'styled-components'
+
+import { GlobalStyles } from '@/styles/global'
 import { ligthTheme } from '@/styles/themes'
+import { HeaderContextProvider } from '@/context/navigation/header'
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <ThemeProvider theme={ligthTheme}>
-      <GlobalStyles />
-      <Component {...pageProps} />
+      <HeaderContextProvider>
+        <GlobalStyles />
+        <Component {...pageProps} />
+      </HeaderContextProvider>
     </ThemeProvider>
   )
 }

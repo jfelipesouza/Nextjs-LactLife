@@ -1,34 +1,58 @@
 import styled from 'styled-components'
 import Link from 'next/link'
+import { MdMenu } from 'react-icons/md'
 
 export const Container = styled.header`
   background-color: ${({ theme }) => theme.colors.secundary};
   position: absolute;
+  width: 100vw;
   top: 0;
-  left: 0;
-  right: 0;
   box-shadow: 2px 3px 5px #0000007f;
 `
 
 export const NavBar = styled.nav`
   width: 100%;
-  height: 5rem;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  padding: 0 ${({ theme }) => theme.padding.rootPadding};
+  justify-content: space-between;
+
+  padding: ${({ theme }) => theme.padding.headerPaddingVertical}
+    ${({ theme }) => theme.padding.rootPadding};
+
+  #hamburgue {
+    display: none;
+  }
+
+  @media screen and (max-width: 1060px) {
+    #hamburgue {
+      display: flex;
+    }
+  }
+  @media screen and (max-width: 450px) {
+    padding: 1.5rem;
+  }
+`
+export const LogoImage = styled.img`
+  height: 60px;
+  @media screen and (max-width: 450px) {
+    height: 50px;
+  }
 `
 
 export const ListLinks = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  flex: 1;
+  flex: 3;
+  height: 3.125rem;
+  @media screen and (max-width: 1200px) {
+    display: none;
+  }
 `
 
 export const Links = styled(Link)`
   color: ${({ theme }) => theme.colors.headerLinkText};
-  font-size: ${({ theme }) => theme.fontSize.md};
+  font-size: ${({ theme }) => theme.fontSize.headerLinks};
   position: relative;
 
   ::after {
@@ -48,4 +72,60 @@ export const Links = styled(Link)`
       width: 100%;
     }
   }
+`
+
+export const SearchBar = styled.div`
+  position: relative;
+  display: flex;
+  height: 3.125rem;
+  justify-content: flex-end;
+
+  @media screen and (min-width: 1200px) {
+    flex: 1;
+  }
+  @media screen and (max-width: 1200px) {
+    width: 350px;
+    justify-content: center;
+  }
+  @media screen and (max-width: 770px) {
+    display: none;
+  }
+`
+
+export const SearchInput = styled.input`
+  height: 3.125rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  border: solid 2px white;
+  padding-left: 0.5rem;
+  padding-right: 2rem;
+  font-size: 1.125rem;
+
+  ::placeholder {
+    font-weight: 700;
+  }
+`
+
+export const SearchButton = styled.div`
+  position: absolute;
+  top: 0.85rem;
+  right: 0.5rem;
+
+  #icon {
+    border-radius: 20rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  :active {
+    #icon {
+      opacity: 0.2;
+    }
+  }
+`
+
+export const MenuHamburgue = styled(MdMenu)`
+  font-size: 2.5rem;
+  color: white;
+  cursor: pointer;
 `

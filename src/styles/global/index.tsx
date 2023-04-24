@@ -11,7 +11,11 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-size: ${({ theme }) => theme.fontSize.sm};
-    font-family: ${({ theme }) => theme.fontFamily.lato};
+    font-family: ${({ theme }) => theme.fontFamily.lato},sans-serif;
+    -webkit-user-select:none;  
+    -moz-user-select:none;     
+    -ms-user-select:none;      
+    user-select:none; 
   }
   body{
     background-color: ${({ theme }) => theme.colors.background};

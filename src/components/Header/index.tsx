@@ -1,7 +1,22 @@
-import React from 'react'
-import { Container, Links, ListLinks, NavBar } from './styles'
+import React, { useState, useContext } from 'react'
+import Link from 'next/link'
+import {
+  Container,
+  Links,
+  ListLinks,
+  LogoImage,
+  MenuHamburgue,
+  NavBar,
+  SearchBar,
+  SearchButton,
+  SearchInput
+} from './styles'
+import { SearchIcon } from '../icons'
+import { HeaderContext } from '@/context/navigation/header'
 
 const Header: React.FC = () => {
+  const { setVisible } = useContext(HeaderContext)
+
   const bottomLinks = [
     {
       title: 'Home',
@@ -24,17 +39,29 @@ const Header: React.FC = () => {
       ref: ''
     }
   ]
-
+  const openSideBar = () => {
+    setVisible(true)
+  }
   return (
     <Container>
       <NavBar>
-        <div>Logo icone</div>
+        <Link href="/">
+          <LogoImage src={'/assets/images/logo.svg'} alt="logo" />
+        </Link>
+
         <ListLinks>
           {bottomLinks.map(({ title, ref }) => (
             <Links href={ref}>{title}</Links>
           ))}
         </ListLinks>
-        <div>Campo de login</div>
+
+        <SearchBar>
+          <SearchInput placeholder="Encontre a sua receita...  " />
+          <SearchButton>
+            <SearchIcon id={'icon'} />
+          </SearchButton>
+        </SearchBar>
+        <MenuHamburgue id={'hamburgue'} onClick={openSideBar} />
       </NavBar>
     </Container>
   )

@@ -1,74 +1,88 @@
-import Header from '@/components/Header'
-import { InformationCards } from '@/components/InformationCards'
-import {
-  HeroSection,
-  MainContainer,
-  QuestionSection,
-  Title,
-  LeftContainer,
-  RightContainer,
-  ActionButton,
-  SectionTilte,
-  CardWrapper
-} from '@/styles/pages/Home'
 import React from 'react'
 
+import Header from '@/components/Header'
+import { Sidebar } from '../components/Sidebar'
+import { InformationCards } from '@/components/InformationCards'
+import {
+  ActionLink,
+  HeroSection,
+  QuestionSection,
+  QuestionSectionGrid,
+  RevenueSection,
+  SectionTilte
+} from '@/styles/pages/Home'
+import { ContactSupportIcon, RestaurantIcon } from '@/components/icons'
+
 const Home: React.FC = () => {
-  const questionCards = [
+  const informationCards = [
     {
-      title: 'O que é a intolerância à lactose?',
+      title: 'Há níveis de intolerância?',
       description:
-        'A intolerância à lactose é caracterizada pela má absorção da enzima lactase, que dificulta a digestão da lactose...'
+        'A quantidade de lactose necessária para desencadear os sintomas varia de indivíduo para indivíduo...'
     },
     {
-      title: 'O que é a intolerância à lactose?',
+      title: 'Tipos de intolerância',
       description:
-        'A intolerância à lactose é caracterizada pela má absorção da enzima lactase, que dificulta a digestão da lactose...'
+        'Intolerância Primária: Esta é a mais comum. Desenvolve-se ao longo da vida e é crônica, devido a diminuição natural e progressiva da lactase....'
     },
     {
-      title: 'O que é a intolerância à lactose?',
+      title: 'Mas afinal, o que é lactose e lactase?',
       description:
-        'A intolerância à lactose é caracterizada pela má absorção da enzima lactase, que dificulta a digestão da lactose...'
+        'Lactose é popularmente conhecido como o açúcar do leite, tal como a frutose é o açúcar das frutas...'
     },
     {
-      title: 'O que é a intolerância à lactose?',
+      title: 'Tipos de intolerância',
       description:
-        'A intolerância à lactose é caracterizada pela má absorção da enzima lactase, que dificulta a digestão da lactose...'
+        'Intolerância Primária: Esta é a mais comum. Desenvolve-se ao longo da vida e é crônica, devido a diminuição natural e progressiva da lactase...'
     },
     {
-      title: 'O que é a intolerância à lactose?',
+      title: 'Quais são os sintomas?',
       description:
-        'A intolerância à lactose é caracterizada pela má absorção da enzima lactase, que dificulta a digestão da lactose...'
+        'A quantidade de lactose necessária para desencadear os sintomas varia de indivíduo para indivíduo, dependendo da porção de lactose ingerida...'
     },
     {
-      title: 'O que é a intolerância à lactose?',
+      title: 'O que pode substituir o leite?',
       description:
-        'A intolerância à lactose é caracterizada pela má absorção da enzima lactase, que dificulta a digestão da lactose...'
+        'Na alergia ao leite de vaca é necessária dieta sem leite e derivados com atenção especial aos rótulos, pois o leite pode vir com outro nome...'
     }
   ]
   return (
     <>
       <Header />
-      <MainContainer>
-        <HeroSection>
-          <LeftContainer>
-            <Title>Tenho Intolerância a Lactose?</Title>
-            <ActionButton>Clique aqui para saber!</ActionButton>
-          </LeftContainer>
-          <RightContainer> asdasd </RightContainer>
-        </HeroSection>
-        <QuestionSection>
+      <Sidebar />
+      <HeroSection>
+        <img alt="banner" src={'/assets/images/mainBanner.svg'} id={'banner'} />
+        <div id={'hero-section-question'}>
+          <h2 id={'subtitle-question'}>O que é Intolerância</h2>
+          <h2 id={'subtitle-question'}>a Lactose?</h2>
+
+          <ActionLink href={'/about'}>Clique aqui para saber +</ActionLink>
+        </div>
+      </HeroSection>
+      <QuestionSection>
+        <div className="subtitle">
           <SectionTilte>Dúvidas Frequentes</SectionTilte>
-          <CardWrapper>
-            {questionCards.map(({ description, title }) => (
-              <InformationCards title={title} description={description} />
-            ))}
-          </CardWrapper>
-          <ActionButton style={{ alignSelf: 'center' }}>
-            Carregar +
-          </ActionButton>
-        </QuestionSection>
-      </MainContainer>
+          <ContactSupportIcon id={'icon'} />
+        </div>
+        <QuestionSectionGrid>
+          {informationCards.map((data, key) => (
+            <InformationCards
+              description={data.description}
+              title={data.title}
+              key={key}
+            />
+          ))}
+        </QuestionSectionGrid>
+        <ActionLink id={'center'} href={'/duvidas'}>
+          Saiba mais +
+        </ActionLink>
+      </QuestionSection>
+      <RevenueSection>
+        <div className="subtitle">
+          <SectionTilte>Receitas</SectionTilte>
+          <RestaurantIcon id={'icon'} />
+        </div>
+      </RevenueSection>
     </>
   )
 }

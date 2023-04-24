@@ -5,7 +5,8 @@ export const ligth = {
   gray: '#ECECEC',
   headerLinkText: '#fff',
   contrast: '#F2C185',
-  title: '#fff'
+  title: '#fff',
+  white: '#fff'
 }
 
 export const dark = {
