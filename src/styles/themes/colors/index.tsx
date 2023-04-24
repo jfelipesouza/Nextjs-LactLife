@@ -3,6 +3,7 @@ export const ligth = {
   primary: '#F3722C',
   secundary: '#F8961E',
   gray: '#ECECEC',
+  grayHue: '#ddd',
   headerLinkText: '#fff',
   contrast: '#F2C185',
   title: '#fff',
@@ -16,5 +17,7 @@ export const dark = {
   gray: '#676565',
   headerLinkText: '#fff',
   contrast: '#F2C185',
-  title: '#fff'
+  title: '#fff',
+  grayHue: '#ddd',
+  white: '#fff'
 }

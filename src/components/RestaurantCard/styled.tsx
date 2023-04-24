@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 export const Container = styled(Link)`
   height: 422.19px;
-  background-color: red;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
