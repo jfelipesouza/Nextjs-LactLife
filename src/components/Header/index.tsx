@@ -20,11 +20,11 @@ const Header: React.FC = () => {
   const bottomLinks = [
     {
       title: 'Home',
-      ref: ''
+      ref: '/'
     },
     {
       title: 'Receitas',
-      ref: ''
+      ref: '/revenues'
     },
     {
       title: 'Dúvidas',
@@ -51,7 +51,9 @@ const Header: React.FC = () => {
 
         <ListLinks>
           {bottomLinks.map(({ title, ref }) => (
-            <Links href={ref}>{title}</Links>
+            <Links key={title + 'link'} href={ref}>
+              {title}
+            </Links>
           ))}
         </ListLinks>
 

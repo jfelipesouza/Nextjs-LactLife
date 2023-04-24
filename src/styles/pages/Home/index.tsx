@@ -88,7 +88,33 @@ export const ActionLink = styled(Link)`
     font-size: 1rem;
   }
 `
+export const SubtitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
 
+  #icon {
+    font-size: 3rem;
+    color: ${({ theme }) => theme.colors.secundary};
+    margin-left: 1rem;
+  }
+
+  @media screen and (max-width: 450px) {
+    #icon {
+      font-size: 2.25rem;
+      color: ${({ theme }) => theme.colors.secundary};
+      margin-left: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 350px) {
+    #icon {
+      font-size: 2rem;
+      color: ${({ theme }) => theme.colors.secundary};
+      margin-left: 1rem;
+    }
+  }
+`
 export const QuestionSection = styled.section`
   width: 100vw;
   padding: 2rem ${({ theme }) => theme.padding.rootPadding};
@@ -96,31 +122,12 @@ export const QuestionSection = styled.section`
   display: flex;
   flex-direction: column;
 
-  .subtitle {
-    display: flex;
-    align-items: center;
-    margin-bottom: 2rem;
-    #icon {
-      font-size: 3rem;
-      color: ${({ theme }) => theme.colors.secundary};
-      margin-left: 1rem;
-    }
-  }
   #center {
     align-self: center;
   }
-  @media screen and (max-width: 700px) {
-    padding: 2rem;
-  }
-  @media screen and (max-width: 450px) {
-    padding: 2rem;
-    .subtitle {
-      #icon {
-        font-size: 2.25rem;
-        color: ${({ theme }) => theme.colors.secundary};
-        margin-left: 1rem;
-      }
-    }
+
+  @media screen and (max-width: 350px) {
+    padding: 2rem 1rem;
   }
 `
 
@@ -150,36 +157,31 @@ export const QuestionSectionGrid = styled.div`
 
 export const RevenueSection = styled.section`
   width: 100vw;
-  padding: 2rem ${({ theme }) => theme.padding.rootPadding};
+  padding: 2rem;
   margin-bottom: 2rem;
+  background-color: ${({ theme }) => theme.colors.gray};
 
-  .subtitle {
-    display: flex;
-    align-items: center;
-    margin-bottom: 2rem;
-    #icon {
-      font-size: 3rem;
-      color: ${({ theme }) => theme.colors.secundary};
-      margin-left: 1rem;
-    }
-  }
-  @media screen and (max-width: 700px) {
-    padding: 2rem;
-  }
-  @media screen and (max-width: 450px) {
-    padding: 2rem;
-    .subtitle {
-      #icon {
-        font-size: 2.25rem;
-        color: ${({ theme }) => theme.colors.secundary};
-        margin-left: 1rem;
-      }
-    }
-  }
-
-  @media screen and (max-width: 700px) {
-    padding: 2rem;
+  @media screen and (max-width: 350px) {
+    padding: 2rem 1rem;
   }
 `
 
-export const RevenueSlider = styled.div``
+export const RestaurantsSection = styled.section`
+  width: 100vw;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  background-color: ${({ theme }) => theme.colors.background};
+
+  @media screen and (max-width: 350px) {
+    padding: 2rem 1rem;
+  }
+`
+
+export const RestourantContent = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2rem;
+  @media screen and (max-width: 870px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`

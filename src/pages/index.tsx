@@ -1,17 +1,27 @@
 import React from 'react'
 
 import Header from '@/components/Header'
-import { Sidebar } from '../components/Sidebar'
 import { InformationCards } from '@/components/InformationCards'
 import {
   ActionLink,
   HeroSection,
   QuestionSection,
   QuestionSectionGrid,
+  RestaurantsSection,
+  RestourantContent,
   RevenueSection,
-  SectionTilte
+  SectionTilte,
+  SubtitleContainer
 } from '@/styles/pages/Home'
-import { ContactSupportIcon, RestaurantIcon } from '@/components/icons'
+import {
+  ContactSupportIcon,
+  RestaurantIcon,
+  LocationOnIcon
+} from '@/components/icons'
+import { RevenueSlider } from '@/components/RevenueSlider'
+import { sliderMock } from '@/utils/mocks/sliders'
+import { RestaurantCard } from '@/components/RestaurantCard'
+import { restaurantMock } from '@/utils/mocks/restaurants'
 
 const Home: React.FC = () => {
   const informationCards = [
@@ -46,10 +56,10 @@ const Home: React.FC = () => {
         'Na alergia ao leite de vaca é necessária dieta sem leite e derivados com atenção especial aos rótulos, pois o leite pode vir com outro nome...'
     }
   ]
+
   return (
     <>
       <Header />
-      <Sidebar />
       <HeroSection>
         <img alt="banner" src={'/assets/images/mainBanner.svg'} id={'banner'} />
         <div id={'hero-section-question'}>
@@ -60,16 +70,16 @@ const Home: React.FC = () => {
         </div>
       </HeroSection>
       <QuestionSection>
-        <div className="subtitle">
+        <SubtitleContainer>
           <SectionTilte>Dúvidas Frequentes</SectionTilte>
           <ContactSupportIcon id={'icon'} />
-        </div>
+        </SubtitleContainer>
         <QuestionSectionGrid>
-          {informationCards.map((data, key) => (
+          {informationCards.map((data, index) => (
             <InformationCards
               description={data.description}
               title={data.title}
-              key={key}
+              key={index}
             />
           ))}
         </QuestionSectionGrid>
@@ -78,11 +88,23 @@ const Home: React.FC = () => {
         </ActionLink>
       </QuestionSection>
       <RevenueSection>
-        <div className="subtitle">
+        <SubtitleContainer>
           <SectionTilte>Receitas</SectionTilte>
           <RestaurantIcon id={'icon'} />
-        </div>
+        </SubtitleContainer>
+        <RevenueSlider revenue={sliderMock} />
       </RevenueSection>
+      <RestaurantsSection>
+        <SubtitleContainer>
+          <SectionTilte>Onde comer</SectionTilte>
+          <LocationOnIcon id={'icon'} />
+        </SubtitleContainer>
+        <RestourantContent>
+          {restaurantMock.map(data => (
+            <RestaurantCard data={data} key={data.id} />
+          ))}
+        </RestourantContent>
+      </RestaurantsSection>
     </>
   )
 }

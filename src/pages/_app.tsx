@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components'
 import { GlobalStyles } from '@/styles/global'
 import { ligthTheme } from '@/styles/themes'
 import { HeaderContextProvider } from '@/context/navigation/header'
+import { Sidebar } from '../components/Sidebar'
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
@@ -12,6 +13,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
       <HeaderContextProvider>
         <GlobalStyles />
         <Component {...pageProps} />
+        <Sidebar />
       </HeaderContextProvider>
     </ThemeProvider>
   )
