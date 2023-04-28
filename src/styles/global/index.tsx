@@ -11,7 +11,6 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-size: ${({ theme }) => theme.fontSize.sm};
-    font-family: ${({ theme }) => theme.fontFamily.lato},sans-serif;
     -webkit-user-select:none;  
     -moz-user-select:none;     
     -ms-user-select:none;      
@@ -24,7 +23,7 @@ export const GlobalStyles = createGlobalStyle`
     scrollbar-color:${({ theme }) => theme.colors.contrast} #494646;
  
     ::-webkit-scrollbar {
-      width: 4px;
+      width: 0.5rem;
     }
 
     ::-webkit-scrollbar-track {

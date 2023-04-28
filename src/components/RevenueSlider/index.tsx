@@ -8,19 +8,19 @@ type RevenueSlideCards = {
 }
 export const RevenueSlider: React.FC<RevenueSlideCards> = ({ revenue }) => {
   const carousel = useRef<any>(null)
-  const [maxWidth, setMaxWidth] = useState<number>(
-    carousel.current?.scrollWidth - carousel.current?.offsetWidth
-  )
+  const [maxWidth, setMaxWidth] = useState<number>(0)
 
   useEffect(() => {
-    setMaxWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
+    setMaxWidth(
+      carousel.current?.scrollWidth - (carousel.current?.offsetWidth + 24)
+    )
   }, [])
 
   return (
     <Container whileTap={{ cursor: 'grabbing' }} ref={carousel}>
       <SliderContent drag={'x'} dragConstraints={{ right: 0, left: -maxWidth }}>
         {revenue.map(data => (
-          <RevenueCard data={data} />
+          <RevenueCard data={data} key={data.id} />
         ))}
       </SliderContent>
     </Container>

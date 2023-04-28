@@ -36,7 +36,14 @@ const RevenueInformation: React.FC<RevenueInformation> = ({ revenue }) => {
 }
 
 export const getStaticPaths: GetStaticPaths<StaticPathsProps> = async () => {
-  const { data } = await axios.get(process.env.BASE_URL + 'revenues')
+  const { data } = await axios.get(process.env.BASE_URL + 'revenues', {
+    data: {
+      allInformation: true,
+      initialElement: 0,
+      lastElement: 1
+    }
+  })
+  console.log(data)
   const { revenues }: { revenues: IRevenueInformation[] } = data
 
   const routers = (): Path[] => {

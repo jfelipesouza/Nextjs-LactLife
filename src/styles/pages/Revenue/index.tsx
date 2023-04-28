@@ -1,5 +1,23 @@
+import { motion } from 'framer-motion'
 import Link from 'next/link'
-import styled from 'styled-components'
+import { IoTriangle } from 'react-icons/io5'
+import styled, { keyframes } from 'styled-components'
+
+const scaleZ = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  
+  80% {
+    transform: scale(1.07);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+`
 
 export const HeroSection = styled.div`
   position: relative;
@@ -92,23 +110,95 @@ export const ActionLink = styled(Link)`
 export const MainSection = styled.section`
   width: 100%;
   min-height: 100vh;
-  padding: 0 2rem;
+  padding: 0 ${({ theme }) => theme.padding.rootPadding};
+
+  @media screen and (max-width: 750px) {
+    padding: 0 2rem;
+  }
+  @media screen and (max-width: 350px) {
+    padding: 0;
+  }
 `
 export const SearchContainer = styled.div`
   display: flex;
   width: 100%;
   margin: 3rem 0;
+  justify-content: space-between;
 `
 
-export const CategoryList = styled.li`
+export const CategoriesContainer = styled.div``
+
+export const Dropdown = styled.div`
+  display: none;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: ${({ theme }) => theme.colors.secundary};
+  color: ${({ theme }) => theme.colors.white};
+  padding: 0.5rem;
+  width: 220px;
+  font-size: 1.125rem;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: 700;
+
+  @media screen and (max-width: 1060px) {
+    display: flex;
+  }
+`
+export const IconContainer = styled.div`
+  display: flex;
+  width: 25%;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  right: 0;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  cursor: pointer;
+`
+
+export const DropIcon = styled(IoTriangle)<{ open: boolean }>`
+  font-size: 1rem;
+  transform: rotate(${({ open }) => (open ? '0deg' : '180deg')});
+  transition: all 0.3s linear;
+`
+export const DropdownList = styled(motion.ul)`
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+`
+
+export const DropdownListItem = styled(motion.li)`
+  padding: 0.5rem;
+  width: 100%;
+  cursor: pointer;
+  background-color: ${({ theme }) => theme.colors.secundary};
   display: flex;
 
-  ul {
-    margin-right: 1rem;
+  cursor: pointer;
+  text-align: center;
+  border-bottom: 1px solid black;
+  :hover {
+    background-color: ${({ theme }) => theme.colors.primary};
+  }
+`
+
+export const CategoryList = styled.ul`
+  display: flex;
+  gap: 1rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: ${({ theme }) => theme.colors.gray};
     color: ${({ theme }) => theme.colors.secundary};
     padding: 0.5rem 1rem;
     text-transform: uppercase;
+    font-size: 1.125rem;
     cursor: pointer;
 
     :hover {
@@ -122,6 +212,10 @@ export const CategoryList = styled.li`
       background-color: ${({ theme }) => theme.colors.primary};
     }
   }
+
+  @media screen and (max-width: 1060px) {
+    display: none;
+  }
 `
 
 export const RevenuesContent = styled.main`
@@ -130,91 +224,55 @@ export const RevenuesContent = styled.main`
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 2rem;
 
+  .backgroundGray {
+    width: auto;
+    min-width: 300px;
+    height: 300px;
+    border-radius: 1rem;
+    display: flex;
+    margin-right: 2rem;
+    position: relative;
+    background-color: ${({ theme }) => theme.colors.gray};
+    margin: 0;
+  }
+
   @media screen and (min-width: 1800px) {
     grid-template-columns: repeat(3, 1fr);
   }
+
   @media screen and (max-width: 1060px) {
     grid-template-columns: repeat(1, 1fr);
   }
-  @media screen and (max-width: 750px) {
-    align-content: center;
-    justify-items: center;
-  }
-`
-
-export const Card = styled.div`
-  width: auto;
-  min-width: 600px;
-  height: 300px;
-  border-radius: 1rem;
-  display: flex;
-  margin-right: 2rem;
-  position: relative;
-  background-color: ${({ theme }) => theme.colors.gray};
 
   @media screen and (max-width: 750px) {
-    width: 90vw;
-    min-width: 300px;
-  }
-  @media screen and (max-width: 350px) {
-    width: 300px;
-  }
-`
-export const CardImage = styled.img`
-  width: 40%;
-  height: 100%;
-  object-fit: cover;
-  border-top-left-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-  pointer-events: none;
-
-  @media screen and (max-width: 750px) {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 1rem;
-    z-index: 1;
-  }
-`
-export const CardInformation = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 60%;
-  padding: 0rem 2rem;
-
-  .foodName {
-    color: black;
-    font-weight: 700;
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .link {
-    text-transform: uppercase;
-    background-color: ${({ theme }) => theme.colors.secundary};
-    width: max-content;
-    font-size: 1rem;
-    padding: 1rem 3rem;
-    border-radius: 0.5rem;
-    color: ${({ theme }) => theme.colors.white};
-    align-self: center;
-  }
-
-  @media screen and (max-width: 750px) {
-    width: 100%;
-    justify-content: flex-end;
-    padding: 1rem 0 2rem 1rem;
-    padding-bottom: 1.5rem;
-    z-index: 9;
-    background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
-
-    .foodName {
-      color: white;
-      font-size: 1.5rem;
+    .backgroundGray {
+      width: 100%;
+      min-width: 300px;
     }
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+  }
+`
+
+export const SearchActionsContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`
+export const ActionButton = styled.div`
+  background-color: ${({ theme }) => theme.colors.secundary};
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border-radius: 0.25rem;
+
+  .icon {
+    font-size: 1.5rem;
+  }
+  :hover {
+    background-color: ${({ theme }) => theme.colors.primary};
   }
 `

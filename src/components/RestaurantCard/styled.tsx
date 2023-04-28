@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
 
@@ -10,12 +11,6 @@ export const Container = styled(Link)`
   background-color: ${({ theme }) => theme.colors.gray};
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s linear;
-
-  :hover {
-    transform: translateY(-0.5rem);
-    box-shadow: 1px 2px 13px black;
-  }
 `
 
 export const CardImage = styled.img`

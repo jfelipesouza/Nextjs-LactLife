@@ -1,4 +1,7 @@
 import React from 'react'
+import axios from 'axios'
+import Image from 'next/image'
+import { GetStaticProps, GetStaticPropsContext } from 'next'
 
 import Header from '@/components/Header'
 import { InformationCards } from '@/components/InformationCards'
@@ -19,11 +22,15 @@ import {
   LocationOnIcon
 } from '@/components/icons'
 import { RevenueSlider } from '@/components/RevenueSlider'
-import { sliderMock } from '@/utils/mocks/sliders'
 import { RestaurantCard } from '@/components/RestaurantCard'
 import { restaurantMock } from '@/utils/mocks/restaurants'
 
-const Home: React.FC = () => {
+import { RevenueDTO } from '@/@types/revenue'
+
+type HomeScreenProps = {
+  revenues: RevenueDTO[]
+}
+const Home: React.FC<HomeScreenProps> = props => {
   const informationCards = [
     {
       title: 'Há níveis de intolerância?',
@@ -61,7 +68,14 @@ const Home: React.FC = () => {
     <>
       <Header />
       <HeroSection>
-        <img alt="banner" src={'/assets/images/mainBanner.svg'} id={'banner'} />
+        <Image
+          alt="banner"
+          src={'/assets/images/mainBanner.svg'}
+          id={'banner'}
+          fill
+          placeholder={'blur'}
+          blurDataURL={'/assets/images/mainBanner.svg'}
+        />
         <div id={'hero-section-question'}>
           <h2 id={'subtitle-question'}>O que é Intolerância</h2>
           <h2 id={'subtitle-question'}>a Lactose?</h2>
@@ -71,7 +85,7 @@ const Home: React.FC = () => {
       </HeroSection>
       <QuestionSection>
         <SubtitleContainer>
-          <SectionTilte>Dúvidas Frequentes</SectionTilte>
+          <SectionTilte href={'/questions'}>Dúvidas Frequentes</SectionTilte>
           <ContactSupportIcon id={'icon'} />
         </SubtitleContainer>
         <QuestionSectionGrid>
@@ -83,20 +97,23 @@ const Home: React.FC = () => {
             />
           ))}
         </QuestionSectionGrid>
-        <ActionLink id={'center'} href={'/duvidas'}>
+        <ActionLink id={'center'} href={'/questions'}>
           Saiba mais +
         </ActionLink>
       </QuestionSection>
       <RevenueSection>
         <SubtitleContainer>
-          <SectionTilte>Receitas</SectionTilte>
+          <SectionTilte href={'/revenues'}>Receitas</SectionTilte>
           <RestaurantIcon id={'icon'} />
         </SubtitleContainer>
-        <RevenueSlider revenue={sliderMock} />
+        <RevenueSlider revenue={props.revenues} />
+        <ActionLink id={'center'} href={'/questions'}>
+          Encontre a sua
+        </ActionLink>
       </RevenueSection>
       <RestaurantsSection>
         <SubtitleContainer>
-          <SectionTilte>Onde comer</SectionTilte>
+          <SectionTilte href={'/restaurants'}>Onde comer</SectionTilte>
           <LocationOnIcon id={'icon'} />
         </SubtitleContainer>
         <RestourantContent>
@@ -107,6 +124,32 @@ const Home: React.FC = () => {
       </RestaurantsSection>
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps<HomeScreenProps> = async (
+  context: GetStaticPropsContext
+) => {
+  try {
+    const revenues = async () => {
+      const { data } = await axios.get(process.env.BASE_URL + 'revenues', {
+        data: { allInformation: true, initialElement: 0, lastElement: 10 }
+      })
+      return data.revenues
+    }
+    return {
+      props: {
+        revenues: await revenues()
+      },
+      revalidate: 60 * 60 // will be passed to the page component as props
+    }
+  } catch (error) {
+    return {
+      props: {
+        revenues: []
+      },
+      revalidate: 60 * 60 // will be passed to the page component as props
+    }
+  }
 }
 
 export default Home

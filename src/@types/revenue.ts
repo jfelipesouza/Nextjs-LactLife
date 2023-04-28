@@ -1,7 +1,7 @@
 export type RevenueDTO = {
   image: {
     mimeType: string
-    base64: string
+    file: string
   }
   foodName: string
   id: string
@@ -21,7 +21,6 @@ export type IRevenueInformation = {
   image: {
     mimeType: string
     file: string
-    id: string
   }
   id: string
 }

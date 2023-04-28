@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const HeroSection = styled.section`
   position: relative;
   width: 100vw;
-  min-height: calc(100vh - 8rem);
+  min-height: calc(100vh - 7.9rem);
   display: flex;
   margin-top: 7.9rem;
   align-items: center;
@@ -52,7 +52,7 @@ export const HeroSection = styled.section`
   }
 
   @media screen and (max-width: 450px) {
-    margin-top: 6.39rem;
+    margin-top: 6.3rem;
   }
   @media screen and (max-width: 350px) {
     #hero-section-question {
@@ -76,6 +76,10 @@ export const ActionLink = styled(Link)`
   border-radius: 5px;
   font-size: 1.5rem;
 
+  :hover {
+    background-color: ${({ theme }) => theme.colors.primary};
+  }
+
   @media screen and (max-width: 700px) {
     margin-top: 3rem;
   }
@@ -92,7 +96,7 @@ export const SubtitleContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
-
+  align-self: flex-start;
   #icon {
     font-size: 3rem;
     color: ${({ theme }) => theme.colors.secundary};
@@ -126,15 +130,19 @@ export const QuestionSection = styled.section`
     align-self: center;
   }
 
-  @media screen and (max-width: 350px) {
+  @media screen and (max-width: 500px) {
     padding: 2rem 1rem;
   }
 `
 
-export const SectionTilte = styled.h3`
+export const SectionTilte = styled(Link)`
   font-size: 2rem;
   color: black;
   font-weight: 800;
+
+  :hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
   @media screen and (max-width: 450px) {
     font-size: 1.75rem;
   }
@@ -157,12 +165,14 @@ export const QuestionSectionGrid = styled.div`
 
 export const RevenueSection = styled.section`
   width: 100vw;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  padding: 3rem 0 3rem ${({ theme }) => theme.padding.rootPadding};
   background-color: ${({ theme }) => theme.colors.gray};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  @media screen and (max-width: 350px) {
-    padding: 2rem 1rem;
+  @media screen and (max-width: 500px) {
+    padding: 2rem 0rem 2rem 1rem;
   }
 `
 

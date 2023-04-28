@@ -9,22 +9,24 @@ type RestaurantCardProps = {
 }
 
 export const RestaurantCard: React.FC<RestaurantCardProps> = ({ data }) => {
-  const stars: { id: number }[] = []
+  const stars: { numberOfStar: number }[] = []
   const returnStar = () => {
     for (let index = 0; index < data.numberOfStar; index++) {
-      stars.push({ id: index })
+      stars.push({ numberOfStar: index })
     }
   }
-  returnStar()
+  useEffect(() => {
+    returnStar()
+  }, [])
 
   return (
     <Container href={'/restaurants'}>
-      <CardImage src={data.image} />
+      <CardImage alt={data.name} src={data.image} />
       <CardInformation>
         <span className="restaurantName">{data.name}</span>
         <div className="stars">
-          {stars.map(data => (
-            <MdStar className="star" key={data.id} />
+          {stars.map((star, index) => (
+            <MdStar className="star" key={index} />
           ))}
         </div>
       </CardInformation>

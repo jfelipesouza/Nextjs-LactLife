@@ -4,15 +4,17 @@ import styled from 'styled-components'
 export const SidebarContainer = styled.div<{ visible: boolean }>`
   position: fixed;
   top: 0;
-  bottom: 0;
+  bottom: -40vh;
   left: 0;
   right: 0;
   z-index: 999;
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
   background-color: rgba(0, 0, 0, 0.5);
   display: ${({ visible }) => (visible ? 'flex' : 'none')};
   justify-content: flex-end;
 `
-export const SidebarContent = styled.div`
+
+export const SidebarContent = styled.div<{ showAnimation: boolean }>`
   width: 320px;
   height: 100vh;
   background-color: ${({ theme }) => theme.colors.secundary};
@@ -21,13 +23,17 @@ export const SidebarContent = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 1rem 0 0 0;
+  transition: all 0.2s linear;
+  transform: translateX(
+    ${({ showAnimation }) => (showAnimation ? '0' : '100%')}
+  );
 `
 
 export const LogoContainer = styled.div`
   position: relative;
-  width: 300px;
+  width: 100%;
   height: 100px;
-  margin-bottom: 2rem;
+  margin: 1rem 0 1rem 0;
   img {
     position: absolute;
     width: 100%;
@@ -49,7 +55,7 @@ export const SidebarButtonsContent = styled.div`
   align-items: center;
 
   .icon {
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-right: 1rem;
     color: ${({ theme }) => theme.colors.white};
   }
@@ -57,5 +63,6 @@ export const SidebarButtonsContent = styled.div`
 
 export const SidebarButtonsLinks = styled(Link)`
   width: 100%;
+  font-size: 1.5rem;
   color: ${({ theme }) => theme.colors.white};
 `

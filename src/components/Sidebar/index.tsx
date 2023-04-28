@@ -1,13 +1,8 @@
 import { HeaderContext } from '@/context/navigation/header'
 import { bottomLinks } from '@/utils/mocks/header'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { MdHelp, MdHome } from 'react-icons/md'
-import {
-  ContactSupportIcon,
-  LocationOnIcon,
-  RestaurantIcon,
-  SearchIcon
-} from '../icons'
+import { ContactSupportIcon, LocationOnIcon, RestaurantIcon } from '../icons'
 import {
   LogoContainer,
   SidebarButtonsContainer,
@@ -19,6 +14,7 @@ import {
 
 export const Sidebar: React.FC = () => {
   const { setVisible, visible } = useContext(HeaderContext)
+  const [showAnimation, setShowAnimation] = useState<boolean>(false)
   const closeSidebar = () => {
     setVisible(false)
   }
@@ -40,9 +36,13 @@ export const Sidebar: React.FC = () => {
         break
     }
   }
+
+  useEffect(() => {
+    setShowAnimation(visible)
+  }, [visible])
   return (
     <SidebarContainer onClick={closeSidebar} visible={visible}>
-      <SidebarContent>
+      <SidebarContent showAnimation={showAnimation}>
         <LogoContainer>
           <img alt={''} src={'/assets/images/logo.svg'} />
         </LogoContainer>
