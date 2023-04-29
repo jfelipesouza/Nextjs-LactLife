@@ -9,13 +9,6 @@ type StaticPathsProps = {
   id: string
 }
 
-type Path =
-  | string
-  | {
-      params: StaticPathsProps
-      locale?: string | undefined
-    }
-
 type RevenueInformation = {
   revenue: IRevenueInformation
 }
@@ -37,26 +30,18 @@ const RevenueInformation: React.FC<RevenueInformation> = ({ revenue }) => {
 
 export const getStaticPaths: GetStaticPaths<StaticPathsProps> = async () => {
   const { data } = await axios.get(process.env.BASE_URL + 'revenues', {
-    data: {
-      allInformation: true,
-      initialElement: 0,
-      lastElement: 1
+    params: {
+      start: 0,
+      end: 1,
+      minimun: true
     }
   })
-  console.log(data)
-  const { revenues }: { revenues: IRevenueInformation[] } = data
-
-  const routers = (): Path[] => {
-    return revenues.map(
-      ({ id }): Path => ({
-        params: {
-          id
-        }
-      })
-    )
-  }
+  const { revenues }: { revenues: { id: string }[] } = data
+  const paths = revenues.map(({ id }) => {
+    return { params: { id: id } }
+  })
   return {
-    paths: routers(),
+    paths: paths || [],
     fallback: true
   }
 }
@@ -66,17 +51,22 @@ export const getStaticProps: GetStaticProps = async ({
 }: GetStaticPropsContext) => {
   const id = params?.id
 
-  const { data } = await axios.get(
-    process.env.BASE_URL + 'revenues/information',
-    {
-      data: { id }
+  if (id) {
+    const { data } = await axios.get(
+      process.env.BASE_URL + 'revenues/information',
+      {
+        params: { id }
+      }
+    )
+    return {
+      props: {
+        revenue: data.revenue
+      }
     }
-  )
+  }
 
   return {
-    props: {
-      revenue: data.revenue
-    }
+    notFound: true
   }
 }
 

@@ -20,7 +20,7 @@ export const RevenueSlider: React.FC<RevenueSlideCards> = ({ revenue }) => {
     <Container whileTap={{ cursor: 'grabbing' }} ref={carousel}>
       <SliderContent drag={'x'} dragConstraints={{ right: 0, left: -maxWidth }}>
         {revenue.map(data => (
-          <RevenueCard data={data} key={data.id} />
+          <RevenueCard revenue={data} key={data.id} />
         ))}
       </SliderContent>
     </Container>

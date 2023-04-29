@@ -1,32 +1,52 @@
+import { ImageDTO } from '@/@types/image'
 import { RevenueDTO } from '@/@types/revenue'
+import { api } from '@/utils/axios'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Card, CardImage, CardImageContainer, CardInformation } from './styled'
 
 type RevenueCardProps = {
-  data: RevenueDTO
+  revenue: RevenueDTO
   style?: string
 }
 
-export const RevenueCard: React.FC<RevenueCardProps> = ({ data, style }) => {
+export const RevenueCard: React.FC<RevenueCardProps> = ({ revenue, style }) => {
+  const [image, setImage] = useState<ImageDTO>()
+
+  const findImageById = async () => {
+    const { data } = await api.get<{ image: ImageDTO }>('files/images', {
+      params: {
+        id: revenue.image.id
+      }
+    })
+    if (data.image) {
+      const { mimeType, file } = data.image
+      setImage({ mimeType, file })
+    }
+  }
+
+  useEffect(() => {
+    findImageById()
+  }, [])
+
   return (
-    <Card key={data.id} className={style}>
+    <Card key={revenue.id} className={style}>
       <CardImageContainer>
-        <CardImage
-          fill
-          loading="lazy"
-          alt={data ? data.foodName : 'food-image'}
-          src={
-            data ? `data:${data.image.mimeType};base64,${data.image.file}` : ''
-          }
-        />
+        {image && (
+          <CardImage
+            fill
+            loading="lazy"
+            alt={revenue ? revenue.foodName : 'food-image'}
+            src={revenue ? `data:${image.mimeType};base64,${image.file}` : ''}
+          />
+        )}
       </CardImageContainer>
       <CardInformation>
-        <h4 className="foodName">{data.foodName}</h4>
+        <h4 className="foodName">{revenue.foodName}</h4>
         <Link
           className="link"
-          href={data ? `/revenues/informations/${data.id}` : '/'}
+          href={revenue ? `/revenues/informations/${revenue.id}` : '/'}
         >
           Ver receita
         </Link>

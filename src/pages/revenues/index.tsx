@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { GetStaticProps, GetStaticPropsContext } from 'next'
+import { IoSearchSharp } from 'react-icons/io5'
 import axios from 'axios'
-import { IoSearchSharp, IoTriangle } from 'react-icons/io5'
 
 import Header from '@/components/Header'
 import { RevenueDTO } from '@/@types/revenue'
@@ -124,14 +124,12 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
     }
   }
   const handleFindRevenuesByCategory = async (category: string) => {
-    console.log(category)
     if (openDrop) setOpenDrop(false)
 
     if (category.toLowerCase() === 'tudo') {
       const { data } = await api.get('revenues', {
         params: { all: true, start: 0, end: 0 }
       })
-      console.log(data)
       setFindRevenues(data.revenues)
     } else {
       const { data } = await api.get('revenues/category', {
@@ -142,7 +140,6 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
           name: category
         }
       })
-      console.log(data)
       setFindRevenues(data.revenues)
     }
   }
@@ -160,11 +157,7 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
           <>
             <img
               alt={revenues[0].foodName}
-              src={
-                revenues[0]
-                  ? `data:${revenues[0].image.mimeType};base64,${revenues[0].image.file}`
-                  : ''
-              }
+              src={revenues[0] ? `` : ''}
               id={'banner'}
             />
             <div id={'hero-section-question'}>
@@ -226,7 +219,7 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
           {findRevenues.map(revenue => (
             <RevenueCard
               style={'backgroundGray'}
-              data={revenue}
+              revenue={revenue}
               key={revenue.id}
             />
           ))}
@@ -245,20 +238,20 @@ export const getStaticProps: GetStaticProps<StaticRevenueScreenProps> = async (
   }
   const getAllrevenues = async (): Promise<RevenueDTO[]> => {
     const { data } = await axios.get(process.env.BASE_URL + 'revenues', {
-      data: { allInformation: true, initialElement: 0, lastElement: 10 }
+      params: { minimun: false, start: 0, end: 10 }
     })
-
-    return data.revenues as RevenueDTO[]
+    return data.revenues
   }
 
   const [categories, revenues] = await Promise.all([
     getCategories(),
     getAllrevenues()
   ])
+
   return {
     props: {
-      categories,
-      revenues
+      categories: categories,
+      revenues: revenues
     },
     revalidate: 60 * 60
   }

@@ -131,11 +131,15 @@ export const getStaticProps: GetStaticProps<HomeScreenProps> = async (
 ) => {
   try {
     const revenues = async () => {
-      const { data } = await axios.get(process.env.BASE_URL + 'revenues', {
-        data: { allInformation: true, initialElement: 0, lastElement: 10 }
-      })
-      return data.revenues
+      const result = await axios.get<{ revenues: RevenueDTO[] }>(
+        process.env.BASE_URL + 'revenues',
+        {
+          params: { start: 0, end: 10 }
+        }
+      )
+      return result.data.revenues
     }
+
     return {
       props: {
         revenues: await revenues()

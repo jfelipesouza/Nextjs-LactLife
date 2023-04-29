@@ -1,7 +1,9 @@
 export type RevenueDTO = {
   image: {
-    mimeType: string
-    file: string
+    id: string
+  }
+  categories: {
+    name: string
   }
   foodName: string
   id: string
