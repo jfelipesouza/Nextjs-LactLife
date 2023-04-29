@@ -4,7 +4,7 @@ import { IoSearchSharp } from 'react-icons/io5'
 import axios from 'axios'
 
 import Header from '@/components/Header'
-import { RevenueDTO } from '@/@types/revenue'
+import { IRevenueInformation, RevenueDTO } from '@/@types/revenue'
 import { RevenueCard } from '@/components/RevenueCard'
 import {
   ActionButton,
@@ -23,6 +23,7 @@ import {
   SearchContainer
 } from '@/styles/pages/Revenue'
 import { api } from '@/utils/axios'
+import Image from 'next/image'
 
 type ICategory = {
   id: string
@@ -31,11 +32,13 @@ type ICategory = {
 type StaticRevenueScreenProps = {
   categories: ICategory[]
   revenues: RevenueDTO[]
+  banner: IRevenueInformation
 }
 
 const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
   categories,
-  revenues
+  revenues,
+  banner
 }) => {
   const [lastCategory, setLastCategory] = useState<number>(1)
   const [category, setCategory] = useState('')
@@ -126,22 +129,14 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
   const handleFindRevenuesByCategory = async (category: string) => {
     if (openDrop) setOpenDrop(false)
 
-    if (category.toLowerCase() === 'tudo') {
-      const { data } = await api.get('revenues', {
-        params: { all: true, start: 0, end: 0 }
-      })
-      setFindRevenues(data.revenues)
-    } else {
-      const { data } = await api.get('revenues/category', {
-        params: {
-          allInformation: true,
-          start: 0,
-          end: 10,
-          name: category
-        }
-      })
-      setFindRevenues(data.revenues)
-    }
+    const { data } = await api.get('category/revenues', {
+      params: {
+        start: 0,
+        end: 10,
+        name: category
+      }
+    })
+    setFindRevenues(data.revenues)
   }
 
   useEffect(() => {
@@ -153,17 +148,25 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
     <>
       <Header />
       <HeroSection>
-        {revenues && (
+        {banner && (
           <>
-            <img
-              alt={revenues[0].foodName}
-              src={revenues[0] ? `` : ''}
+            <Image
+              alt={banner.foodName}
+              src={
+                banner
+                  ? `data:${banner.image.mimeType};base64,${banner.image.file}`
+                  : ''
+              }
+              fill
+              loading={'lazy'}
+              placeholder={'blur'}
+              blurDataURL={`data:${banner.image.mimeType};base64,${banner.image.file}`}
               id={'banner'}
             />
             <div id={'hero-section-question'}>
-              <h2 id={'subtitle-question'}>{revenues[0].foodName}</h2>
+              <h2 id={'subtitle-question'}>{banner.foodName}</h2>
 
-              <ActionLink href={`revenues/informations/${revenues[0].id}`}>
+              <ActionLink href={`revenues/informations/${banner.id}`}>
                 Ver receita
               </ActionLink>
             </div>
@@ -243,15 +246,24 @@ export const getStaticProps: GetStaticProps<StaticRevenueScreenProps> = async (
     return data.revenues
   }
 
-  const [categories, revenues] = await Promise.all([
+  const getBanner = async (): Promise<IRevenueInformation> => {
+    const { data } = await axios.get<{ revenue: IRevenueInformation }>(
+      process.env.BASE_URL + 'revenues/random'
+    )
+    return data.revenue
+  }
+
+  const [categories, revenues, banner] = await Promise.all([
     getCategories(),
-    getAllrevenues()
+    getAllrevenues(),
+    getBanner()
   ])
 
   return {
     props: {
-      categories: categories,
-      revenues: revenues
+      categories,
+      revenues,
+      banner
     },
     revalidate: 60 * 60
   }

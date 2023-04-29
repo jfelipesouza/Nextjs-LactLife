@@ -37,6 +37,8 @@ export const RevenueCard: React.FC<RevenueCardProps> = ({ revenue, style }) => {
           <CardImage
             fill
             loading="lazy"
+            placeholder={'blur'}
+            blurDataURL={'/assets/images/mainBanner.svg'}
             alt={revenue ? revenue.foodName : 'food-image'}
             src={revenue ? `data:${image.mimeType};base64,${image.file}` : ''}
           />

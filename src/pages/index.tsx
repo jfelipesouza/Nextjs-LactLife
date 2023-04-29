@@ -107,7 +107,7 @@ const Home: React.FC<HomeScreenProps> = props => {
           <RestaurantIcon id={'icon'} />
         </SubtitleContainer>
         <RevenueSlider revenue={props.revenues} />
-        <ActionLink id={'center'} href={'/questions'}>
+        <ActionLink id={'center'} href={'/revenues'}>
           Encontre a sua
         </ActionLink>
       </RevenueSection>
@@ -130,7 +130,7 @@ export const getStaticProps: GetStaticProps<HomeScreenProps> = async (
   context: GetStaticPropsContext
 ) => {
   try {
-    const revenues = async () => {
+    const getRevenues = async () => {
       const result = await axios.get<{ revenues: RevenueDTO[] }>(
         process.env.BASE_URL + 'revenues',
         {
@@ -139,10 +139,11 @@ export const getStaticProps: GetStaticProps<HomeScreenProps> = async (
       )
       return result.data.revenues
     }
+    const revenues = await getRevenues()
 
     return {
       props: {
-        revenues: await revenues()
+        revenues
       },
       revalidate: 60 * 60 // will be passed to the page component as props
     }

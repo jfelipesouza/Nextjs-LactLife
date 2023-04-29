@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdStar } from 'react-icons/md'
 
 import { RestaurantDTO } from '@/@types/restaurant'
@@ -9,11 +9,14 @@ type RestaurantCardProps = {
 }
 
 export const RestaurantCard: React.FC<RestaurantCardProps> = ({ data }) => {
-  const stars: { numberOfStar: number }[] = []
+  const [stars, setStars] = useState<{}[]>([])
+
   const returnStar = () => {
+    const addStars = []
     for (let index = 0; index < data.numberOfStar; index++) {
-      stars.push({ numberOfStar: index })
+      addStars.push({})
     }
+    setStars(addStars)
   }
   useEffect(() => {
     returnStar()
