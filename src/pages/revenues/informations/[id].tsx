@@ -32,35 +32,39 @@ const RevenueInformation: React.FC<RevenueInformation> = ({ revenue }) => {
 
     console.log(sizes);
   }, []);
-  return (
-    <>
-      <Header />
-      <Container>
-        <HeroSection>
-          <ImageContainer>
-            <Image
-              alt={revenue.foodName}
-              src={`data:${revenue.image.mimeType};base64,${revenue.image.file}`}
-              fill
-            />
-          </ImageContainer>
-          <InformationContainer>
-            <FoodNameTitle>{revenue.foodName}</FoodNameTitle>
-            <IngredientsCardContainer>
-              <IngredientsTitle>Ingredientes</IngredientsTitle>
-              {revenue.ingredients.map((item) => (
-                <IngredientItem>
-                  <CheckItem />
-                  <span className={"info"}>{item.count}</span>
-                  <span className="info"> {item.name}</span>
-                </IngredientItem>
-              ))}
-            </IngredientsCardContainer>
-          </InformationContainer>
-        </HeroSection>
-      </Container>
-    </>
-  );
+  if (revenue) {
+    return (
+      <>
+        <Header />
+        <Container>
+          <HeroSection>
+            <ImageContainer>
+              <Image
+                alt={revenue.foodName}
+                src={`data:${revenue.image.mimeType};base64,${revenue.image.file}`}
+                fill
+              />
+            </ImageContainer>
+            <InformationContainer>
+              <FoodNameTitle>{revenue.foodName}</FoodNameTitle>
+              <IngredientsCardContainer>
+                <IngredientsTitle>Ingredientes</IngredientsTitle>
+                {revenue.ingredients.map((item) => (
+                  <IngredientItem>
+                    <CheckItem />
+                    <span className={"info"}>{item.count}</span>
+                    <span className="info"> {item.name}</span>
+                  </IngredientItem>
+                ))}
+              </IngredientsCardContainer>
+            </InformationContainer>
+          </HeroSection>
+        </Container>
+      </>
+    );
+  } else {
+    return <p>Carregando</p>;
+  }
 };
 
 export const getStaticPaths: GetStaticPaths<StaticPathsProps> = async () => {
@@ -93,11 +97,17 @@ export const getStaticProps: GetStaticProps = async ({
         params: { id },
       }
     );
-    return {
-      props: {
-        revenue: data.revenue,
-      },
-    };
+    if (data.revenue) {
+      return {
+        props: {
+          revenue: data.revenue,
+        },
+      };
+    } else {
+      return {
+        notFound: true,
+      };
+    }
   }
 
   return {
