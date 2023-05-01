@@ -89,27 +89,33 @@ export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
   const id = params?.id;
-
+  let revenue: RevenueInformation | null = null;
   if (id) {
-    const { data } = await axios.get(
-      process.env.BASE_URL + "revenues/information",
-      {
-        params: { id },
+    try {
+      const { data, status } = await axios.get(
+        process.env.BASE_URL + "revenues/information",
+        {
+          params: { id },
+        }
+      );
+      console.log(status);
+      if (status === 200) {
+        revenue = data.revenue;
+        return {
+          props: {
+            revenue,
+          },
+        };
       }
-    );
-    if (data.revenue) {
       return {
-        props: {
-          revenue: data.revenue,
-        },
+        notFound: true,
       };
-    } else {
+    } catch (error) {
       return {
         notFound: true,
       };
     }
   }
-
   return {
     notFound: true,
   };
