@@ -265,7 +265,7 @@ export const getStaticProps: GetStaticProps<StaticRevenueScreenProps> = async (
       revenues,
       banner,
     },
-    revalidate: 60 * 60,
+    revalidate: 60,
   };
 };
 
