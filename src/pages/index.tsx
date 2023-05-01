@@ -107,7 +107,7 @@ const Home: React.FC<HomeScreenProps> = props => {
           <RestaurantIcon id={'icon'} />
         </SubtitleContainer>
         <RevenueSlider revenue={props.revenues} />
-        <ActionLink id={'center'} href={'/revenues'}>
+        <ActionLink className="translate" id={'center'} href={'/revenues'}>
           Encontre a sua
         </ActionLink>
       </RevenueSection>

@@ -1,23 +1,7 @@
-import { motion } from 'framer-motion'
+import styled from 'styled-components'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { IoTriangle } from 'react-icons/io5'
-import styled, { keyframes } from 'styled-components'
-
-const scaleZ = keyframes`
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  
-  80% {
-    transform: scale(1.07);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-`
 
 export const HeroSection = styled.div`
   position: relative;

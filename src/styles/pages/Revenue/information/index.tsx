@@ -1,76 +1,71 @@
-import { MdDone } from 'react-icons/md'
-import styled from 'styled-components'
+import styled from "styled-components";
+import NextImage from "next/image";
+import { MdCheck } from "react-icons/md";
 
-export const MainSection = styled.section`
-  position: relative;
+export const Container = styled.main`
   width: 100vw;
-  min-height: calc(100vh - 8rem);
+  min-height: 100vh;
+  padding-top: 7.9rem;
+`;
+
+export const HeroSection = styled.section`
+  width: 100vw;
   display: flex;
-  margin-top: 7.8rem;
-  align-items: center;
-  padding: 2rem;
-  justify-content: space-between;
-  .image {
-    width: 667.38px;
-    height: 849.83px;
-    object-fit: cover;
-    border-radius: 1rem;
+  min-height: calc(100vh - 7.9rem);
+  padding: 2rem 5rem;
+`;
+export const ImageContainer = styled.div`
+  position: relative;
+  width: 40vw;
+`;
+export const Image = styled(NextImage)`
+  object-fit: cover;
+  border-radius: 2rem;
+`;
+
+export const InformationContainer = styled.div`
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 0 4rem;
+  gap: 2.5rem;
+`;
+
+export const FoodNameTitle = styled.h2`
+  font-size: 4rem;
+  font-weight: 900;
+  color: ${({ theme }) => theme.colors.secundary};
+`;
+
+export const IngredientsCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 0.2rem solid ${({ theme }) => theme.colors.secundary};
+  height: max-content;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+`;
+
+export const IngredientsTitle = styled.h3`
+  color: ${({ theme }) => theme.colors.secundary};
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+`;
+
+export const IngredientItem = styled.div`
+  display: flex;
+  margin-bottom: 0.1rem;
+  .info:nth-child(2n) {
+    margin-right: 0.5rem;
   }
-  .informationContainer {
-    display: flex;
-    flex: 1;
-    height: 70vh;
-    flex-direction: column;
-    align-items: center;
-
-    h2 {
-      font-size: 4rem;
-      color: ${({ theme }) => theme.colors.secundary};
-
-      margin-bottom: 2rem;
-    }
-
-    .ingredientsContainer {
-      width: 70%;
-      height: 500px;
-      border: 3px solid ${({ theme }) => theme.colors.secundary};
-      padding: 4rem 2rem;
-      align-items: center;
-      border-radius: 1rem;
-      .ingredientsContent{
-        f
-      }
-      .ingredientsTitle {
-        font-size: 3rem;
-        margin-bottom: 3rem;
-        color: ${({ theme }) => theme.colors.primary};
-      }
-      .ingredient {
-        font-size: 1.5rem;
-      }
-      .bold {
-        font-size: 1.5rem;
-        font-weight: 900;
-      }
-      .icons {
-        font-size: 2rem;
-        color: ${({ theme }) => theme.colors.primary};
-      }
-    }
+  .info {
+    color: ${({ theme }) => theme.colors.text};
+    font-size: 1.5rem;
   }
-`
+`;
 
-export const Icon = styled(MdDone)`
+export const CheckItem = styled(MdCheck)`
   font-size: 2rem;
-  @media screen and (max-width: 700px) {
-    margin-top: 3rem;
-  }
-  @media screen and (max-width: 450px) {
-    margin-top: 2rem;
-    padding: 0.8rem 1rem;
-    font-size: 1.125rem;
-  }
-  @media screen and (max-width: 350px) {
-    font-size: 1rem;
-  }
-`
+  color: ${({ theme }) => theme.colors.secundary};
+  margin-right: 0.5rem;
+`;

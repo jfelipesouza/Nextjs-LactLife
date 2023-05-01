@@ -165,12 +165,16 @@ export const QuestionSectionGrid = styled.div`
 
 export const RevenueSection = styled.section`
   width: 100vw;
-  padding: 3rem 0 3rem ${({ theme }) => theme.padding.rootPadding};
+  padding: 3rem ${({ theme }) => theme.padding.rootPadding};
+  padding-right: 0rem;
   background-color: ${({ theme }) => theme.colors.gray};
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  .translate {
+    transform: translateX(-0.5rem);
+  }
   @media screen and (max-width: 500px) {
     padding: 2rem 0rem 2rem 1rem;
   }
