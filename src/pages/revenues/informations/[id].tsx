@@ -73,7 +73,7 @@ const RevenueInformation: React.FC<RevenueInformation> = ({
             <SectionTitle>Como Fazer:</SectionTitle>
             {revenue.preparation.map((e, index) => (
               <PreparationItem key={e}>
-                <PreparationStep>{index}</PreparationStep>
+                <PreparationStep>{index + 1}</PreparationStep>
                 <PreparationStepDescription>{e}</PreparationStepDescription>
               </PreparationItem>
             ))}
