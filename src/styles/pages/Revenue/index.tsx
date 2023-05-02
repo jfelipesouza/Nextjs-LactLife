@@ -1,7 +1,7 @@
-import styled from 'styled-components'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { IoTriangle } from 'react-icons/io5'
+import styled from "styled-components";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { IoTriangle } from "react-icons/io5";
 
 export const HeroSection = styled.div`
   position: relative;
@@ -65,7 +65,7 @@ export const HeroSection = styled.div`
       font-size: 1.75rem;
     }
   }
-`
+`;
 export const ActionLink = styled(Link)`
   text-decoration: none;
   padding: 1rem 2rem;
@@ -89,7 +89,7 @@ export const ActionLink = styled(Link)`
   @media screen and (max-width: 350px) {
     font-size: 1rem;
   }
-`
+`;
 
 export const MainSection = styled.section`
   width: 100%;
@@ -102,15 +102,15 @@ export const MainSection = styled.section`
   @media screen and (max-width: 350px) {
     padding: 0;
   }
-`
+`;
 export const SearchContainer = styled.div`
   display: flex;
   width: 100%;
   margin: 3rem 0;
   justify-content: space-between;
-`
+`;
 
-export const CategoriesContainer = styled.div``
+export const CategoriesContainer = styled.div``;
 
 export const Dropdown = styled.div`
   display: none;
@@ -128,7 +128,7 @@ export const Dropdown = styled.div`
   @media screen and (max-width: 1060px) {
     display: flex;
   }
-`
+`;
 export const IconContainer = styled.div`
   display: flex;
   width: 25%;
@@ -140,20 +140,20 @@ export const IconContainer = styled.div`
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
   cursor: pointer;
-`
+`;
 
 export const DropIcon = styled(IoTriangle)<{ open: boolean }>`
   font-size: 1rem;
-  transform: rotate(${({ open }) => (open ? '0deg' : '180deg')});
+  transform: rotate(${({ open }) => (open ? "0deg" : "180deg")});
   transition: all 0.3s linear;
-`
+`;
 export const DropdownList = styled(motion.ul)`
   position: absolute;
   top: 110%;
   left: 0;
   width: 100%;
   z-index: 99;
-`
+`;
 
 export const DropdownListItem = styled(motion.li)`
   padding: 0.5rem;
@@ -168,7 +168,7 @@ export const DropdownListItem = styled(motion.li)`
   :hover {
     background-color: ${({ theme }) => theme.colors.primary};
   }
-`
+`;
 
 export const CategoryList = styled.ul`
   display: flex;
@@ -200,7 +200,7 @@ export const CategoryList = styled.ul`
   @media screen and (max-width: 1060px) {
     display: none;
   }
-`
+`;
 
 export const RevenuesContent = styled.main`
   margin: 4rem 0;
@@ -234,12 +234,12 @@ export const RevenuesContent = styled.main`
       min-width: 300px;
     }
   }
-`
+`;
 
 export const SearchActionsContainer = styled.div`
   display: flex;
   gap: 1rem;
-`
+`;
 export const ActionButton = styled.div`
   background-color: ${({ theme }) => theme.colors.secundary};
   padding: 0.5rem 1rem;
@@ -259,4 +259,4 @@ export const ActionButton = styled.div`
   :hover {
     background-color: ${({ theme }) => theme.colors.primary};
   }
-`
+`;

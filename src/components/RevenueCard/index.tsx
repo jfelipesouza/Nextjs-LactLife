@@ -1,34 +1,34 @@
-import { ImageDTO } from '@/@types/image'
-import { RevenueDTO } from '@/@types/revenue'
-import { api } from '@/utils/axios'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import { ImageDTO } from "@/@types/image";
+import { RevenueDTO } from "@/@types/revenue";
+import { api } from "@/utils/axios";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
-import { Card, CardImage, CardImageContainer, CardInformation } from './styled'
+import { Card, CardImage, CardImageContainer, CardInformation } from "./styled";
 
 type RevenueCardProps = {
-  revenue: RevenueDTO
-  style?: string
-}
+  revenue: RevenueDTO;
+  style?: string;
+};
 
 export const RevenueCard: React.FC<RevenueCardProps> = ({ revenue, style }) => {
-  const [image, setImage] = useState<ImageDTO>()
+  const [image, setImage] = useState<ImageDTO>();
 
   const findImageById = async () => {
-    const { data } = await api.get<{ image: ImageDTO }>('files/images', {
+    const { data } = await api.get<{ image: ImageDTO }>("files/images", {
       params: {
-        id: revenue.image.id
-      }
-    })
+        id: revenue.image.id,
+      },
+    });
     if (data.image) {
-      const { mimeType, file } = data.image
-      setImage({ mimeType, file })
+      const { mimeType, file } = data.image;
+      setImage({ mimeType, file });
     }
-  }
+  };
 
   useEffect(() => {
-    findImageById()
-  }, [])
+    findImageById();
+  }, []);
 
   return (
     <Card key={revenue.id} className={style}>
@@ -37,10 +37,14 @@ export const RevenueCard: React.FC<RevenueCardProps> = ({ revenue, style }) => {
           <CardImage
             fill
             loading="lazy"
-            placeholder={'blur'}
-            blurDataURL={'/assets/images/mainBanner.svg'}
-            alt={revenue ? revenue.foodName : 'food-image'}
-            src={revenue ? `data:${image.mimeType};base64,${image.file}` : ''}
+            placeholder={"blur"}
+            blurDataURL={"/assets/images/mainBanner.svg"}
+            alt={revenue ? revenue.foodName : "food-image"}
+            src={
+              revenue
+                ? `data:${image.mimeType};base64,${image.file}`
+                : "/assets/images/logo.svg"
+            }
           />
         )}
       </CardImageContainer>
@@ -48,11 +52,11 @@ export const RevenueCard: React.FC<RevenueCardProps> = ({ revenue, style }) => {
         <h4 className="foodName">{revenue.foodName}</h4>
         <Link
           className="link"
-          href={revenue ? `/revenues/informations/${revenue.id}` : '/'}
+          href={revenue ? `/revenues/informations/${revenue.id}` : "/"}
         >
           Ver receita
         </Link>
       </CardInformation>
     </Card>
-  )
-}
+  );
+};

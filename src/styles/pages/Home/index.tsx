@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import styled from 'styled-components'
+import Link from "next/link";
+import styled from "styled-components";
 
 export const HeroSection = styled.section`
   position: relative;
@@ -45,7 +45,11 @@ export const HeroSection = styled.section`
     }
   }
   @media screen and (max-width: 500px) {
-    min-height: calc(50vh - 5rem);
+    min-height: calc(50vh + 5rem);
+    #hero-section-question {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
     #subtitle-question {
       font-size: 2.25rem;
     }
@@ -62,7 +66,7 @@ export const HeroSection = styled.section`
       font-size: 1.75rem;
     }
   }
-`
+`;
 
 export const ActionLink = styled(Link)`
   text-decoration: none;
@@ -83,6 +87,9 @@ export const ActionLink = styled(Link)`
   @media screen and (max-width: 700px) {
     margin-top: 3rem;
   }
+  @media screen and (max-width: 500px) {
+    font-size: 1.25rem;
+  }
   @media screen and (max-width: 450px) {
     margin-top: 2rem;
     padding: 0.8rem 1rem;
@@ -91,7 +98,7 @@ export const ActionLink = styled(Link)`
   @media screen and (max-width: 350px) {
     font-size: 1rem;
   }
-`
+`;
 export const SubtitleContainer = styled.div`
   display: flex;
   align-items: center;
@@ -118,7 +125,7 @@ export const SubtitleContainer = styled.div`
       margin-left: 1rem;
     }
   }
-`
+`;
 export const QuestionSection = styled.section`
   width: 100vw;
   padding: 2rem ${({ theme }) => theme.padding.rootPadding};
@@ -129,11 +136,13 @@ export const QuestionSection = styled.section`
   #center {
     align-self: center;
   }
-
+  @media screen and (max-width: 700px) {
+    padding: 2rem 2rem;
+  }
   @media screen and (max-width: 500px) {
     padding: 2rem 1rem;
   }
-`
+`;
 
 export const SectionTilte = styled(Link)`
   font-size: 2rem;
@@ -146,7 +155,7 @@ export const SectionTilte = styled(Link)`
   @media screen and (max-width: 450px) {
     font-size: 1.75rem;
   }
-`
+`;
 
 export const QuestionSectionGrid = styled.div`
   display: grid;
@@ -161,7 +170,7 @@ export const QuestionSectionGrid = styled.div`
   @media screen and (max-width: 750px) {
     grid-template-columns: repeat(1, 1fr);
   }
-`
+`;
 
 export const RevenueSection = styled.section`
   width: 100vw;
@@ -175,10 +184,11 @@ export const RevenueSection = styled.section`
   .translate {
     transform: translateX(-0.5rem);
   }
+
   @media screen and (max-width: 500px) {
     padding: 2rem 0rem 2rem 1rem;
   }
-`
+`;
 
 export const RestaurantsSection = styled.section`
   width: 100vw;
@@ -189,7 +199,7 @@ export const RestaurantsSection = styled.section`
   @media screen and (max-width: 350px) {
     padding: 2rem 1rem;
   }
-`
+`;
 
 export const RestourantContent = styled.div`
   display: grid;
@@ -198,4 +208,4 @@ export const RestourantContent = styled.div`
   @media screen and (max-width: 870px) {
     grid-template-columns: repeat(1, 1fr);
   }
-`
+`;

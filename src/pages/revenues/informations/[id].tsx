@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import axios from "axios";
 
@@ -15,7 +15,17 @@ import {
   IngredientItem,
   IngredientsTitle,
   CheckItem,
+  PreparationSection,
+  SectionTitle,
+  PreparationItem,
+  PreparationStep,
+  PreparationStepDescription,
+  PreparationCardContainer,
+  PreparationCard,
+  PreparationCardContent,
+  PreparationCardTitle,
 } from "@/styles/pages/Revenue/information";
+import { MdOutlineWatchLater, MdScale, MdSoupKitchen } from "react-icons/md";
 
 type StaticPathsProps = {
   id: string;
@@ -26,12 +36,6 @@ type RevenueInformation = {
 };
 
 const RevenueInformation: React.FC<RevenueInformation> = ({ revenue }) => {
-  useEffect(() => {
-    const { ingredients } = revenue;
-    const sizes = ingredients.map((item) => item.name.slice().length);
-
-    console.log(sizes);
-  }, []);
   if (revenue) {
     return (
       <>
@@ -50,7 +54,7 @@ const RevenueInformation: React.FC<RevenueInformation> = ({ revenue }) => {
               <IngredientsCardContainer>
                 <IngredientsTitle>Ingredientes</IngredientsTitle>
                 {revenue.ingredients.map((item) => (
-                  <IngredientItem>
+                  <IngredientItem key={item.name}>
                     <CheckItem />
                     <span className={"info"}>{item.count}</span>
                     <span className="info"> {item.name}</span>
@@ -59,6 +63,39 @@ const RevenueInformation: React.FC<RevenueInformation> = ({ revenue }) => {
               </IngredientsCardContainer>
             </InformationContainer>
           </HeroSection>
+          <PreparationSection>
+            <SectionTitle>Como Fazer:</SectionTitle>
+            {revenue.preparation.map((e, index) => (
+              <PreparationItem key={e}>
+                <PreparationStep>{index}</PreparationStep>
+                <PreparationStepDescription>{e}</PreparationStepDescription>
+              </PreparationItem>
+            ))}
+            <PreparationCardContainer>
+              <PreparationCard>
+                <MdOutlineWatchLater className={"icon"} />
+                <PreparationCardContent>
+                  <PreparationCardTitle>Preparação</PreparationCardTitle>
+                  {revenue.preparationTime} min
+                </PreparationCardContent>
+              </PreparationCard>
+              <PreparationCard>
+                <MdSoupKitchen className={"icon"} />
+                <PreparationCardContent>
+                  <PreparationCardTitle>Rendimento</PreparationCardTitle>
+                  {revenue.portions}{" "}
+                  {revenue.portions > 1 ? "Porções" : "Porção"}
+                </PreparationCardContent>
+              </PreparationCard>
+              <PreparationCard>
+                <MdScale className={"icon"} />
+                <PreparationCardContent>
+                  <PreparationCardTitle>Calorias</PreparationCardTitle>
+                  {revenue.calories}
+                </PreparationCardContent>
+              </PreparationCard>
+            </PreparationCardContainer>
+          </PreparationSection>
         </Container>
       </>
     );

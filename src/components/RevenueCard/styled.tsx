@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion'
-import Image from 'next/image'
-import styled from 'styled-components'
+import { motion } from "framer-motion";
+import Image from "next/image";
+import styled from "styled-components";
 
 export const Card = styled(motion.div)`
-  width: calc(50vw - 4rem);
+  width: calc(50vw - 5rem);
   min-width: 600px;
   height: 300px;
   border-radius: 10px;
@@ -14,13 +14,13 @@ export const Card = styled(motion.div)`
 
   @media screen and (max-width: 750px) {
     width: calc(80vw);
-    min-width: calc(80vw - 2rem);
+    min-width: calc(80vw - 3rem);
     border-radius: 1rem;
   }
   @media screen and (max-width: 350px) {
     width: 300px;
   }
-`
+`;
 
 export const CardImageContainer = styled.div`
   width: 40%;
@@ -33,7 +33,7 @@ export const CardImageContainer = styled.div`
     height: 100%;
     z-index: 1;
   }
-`
+`;
 
 export const CardImage = styled(Image)`
   width: 100%;
@@ -46,7 +46,7 @@ export const CardImage = styled(Image)`
   @media screen and (max-width: 750px) {
     border-radius: 1rem;
   }
-`
+`;
 export const CardInformation = styled.div`
   display: flex;
   flex-direction: column;
@@ -99,4 +99,4 @@ export const CardInformation = styled.div`
       margin-left: 0;
     }
   }
-`
+`;
