@@ -12,7 +12,7 @@ export const HeroSection = styled.section`
   width: 100vw;
   display: flex;
   min-height: calc(100vh - 7.9rem);
-  padding: 2rem 5rem;
+  padding: 5rem 5rem;
 `;
 export const ImageContainer = styled.div`
   position: relative;
@@ -132,4 +132,10 @@ export const PreparationCardTitle = styled.h4`
   font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 0.1rem;
+`;
+
+export const RevenueSections = styled.section`
+  width: 100vw;
+  background: ${({ theme }) => theme.colors.gray};
+  padding: 3rem 0rem 3rem ${({ theme }) => theme.padding.rootPadding};
 `;

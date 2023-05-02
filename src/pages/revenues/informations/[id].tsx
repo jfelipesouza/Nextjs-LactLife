@@ -2,7 +2,7 @@ import React from "react";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import axios from "axios";
 
-import { IRevenueInformation } from "@/@types/revenue";
+import { IRevenueInformation, RevenueDTO } from "@/@types/revenue";
 import Header from "@/components/Header";
 import {
   Container,
@@ -24,8 +24,10 @@ import {
   PreparationCard,
   PreparationCardContent,
   PreparationCardTitle,
+  RevenueSections,
 } from "@/styles/pages/Revenue/information";
 import { MdOutlineWatchLater, MdScale, MdSoupKitchen } from "react-icons/md";
+import { RevenueSlider } from "@/components/RevenueSlider";
 
 type StaticPathsProps = {
   id: string;
@@ -33,9 +35,13 @@ type StaticPathsProps = {
 
 type RevenueInformation = {
   revenue: IRevenueInformation;
+  otherRevenues: RevenueDTO[];
 };
 
-const RevenueInformation: React.FC<RevenueInformation> = ({ revenue }) => {
+const RevenueInformation: React.FC<RevenueInformation> = ({
+  revenue,
+  otherRevenues,
+}) => {
   if (revenue) {
     return (
       <>
@@ -96,6 +102,10 @@ const RevenueInformation: React.FC<RevenueInformation> = ({ revenue }) => {
               </PreparationCard>
             </PreparationCardContainer>
           </PreparationSection>
+          <RevenueSections>
+            <SectionTitle className={"title"}>Outras Receitas</SectionTitle>
+            <RevenueSlider revenue={otherRevenues} />
+          </RevenueSections>
         </Container>
       </>
     );
@@ -127,6 +137,8 @@ export const getStaticProps: GetStaticProps = async ({
 }: GetStaticPropsContext) => {
   const id = params?.id;
   let revenue: RevenueInformation | null = null;
+  let otherRevenues: RevenueDTO[] | null = null;
+
   if (id) {
     try {
       const { data, status } = await axios.get(
@@ -135,23 +147,38 @@ export const getStaticProps: GetStaticProps = async ({
           params: { id },
         }
       );
-      console.log(status);
+
       if (status === 200) {
         revenue = data.revenue;
+      } else {
         return {
-          props: {
-            revenue,
-          },
+          notFound: true,
         };
       }
-      return {
-        notFound: true,
-      };
     } catch (error) {
       return {
         notFound: true,
       };
     }
+  }
+  if (revenue) {
+    const { data } = await axios.get(
+      process.env.BASE_URL + "category/revenues",
+      {
+        params: {
+          name: "tudo",
+          start: 0,
+          end: 10,
+        },
+      }
+    );
+    otherRevenues = data.revenues;
+    return {
+      props: {
+        revenue,
+        otherRevenues,
+      },
+    };
   }
   return {
     notFound: true,
