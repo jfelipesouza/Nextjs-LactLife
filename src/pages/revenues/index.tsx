@@ -153,15 +153,9 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
           <>
             <Image
               alt={banner.foodName}
-              src={
-                banner
-                  ? `data:${banner.image.mimeType};base64,${banner.image.file}`
-                  : ""
-              }
+              src={`data:${banner.image.mimeType};base64,${banner.image.file}`}
               fill
               loading={"lazy"}
-              placeholder={"blur"}
-              blurDataURL={`data:${banner.image.mimeType};base64,${banner.image.file}`}
               id={"banner"}
             />
             <div id={"hero-section-question"}>
