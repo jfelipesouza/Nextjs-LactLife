@@ -24,6 +24,7 @@ import {
 } from "@/styles/pages/Revenue";
 import { api } from "@/utils/axios";
 import Image from "next/image";
+import { Footer } from "@/components/Footer";
 
 type ICategory = {
   id: string;
@@ -228,6 +229,7 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
           ))}
         </RevenuesContent>
       </MainSection>
+      <Footer />
     </>
   );
 };

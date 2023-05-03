@@ -28,6 +28,7 @@ import {
 } from "@/styles/pages/Revenue/information";
 import { MdOutlineWatchLater, MdScale, MdSoupKitchen } from "react-icons/md";
 import { RevenueSlider } from "@/components/RevenueSlider";
+import { Footer } from "@/components/Footer";
 
 type StaticPathsProps = {
   id: string;
@@ -107,6 +108,7 @@ const RevenueInformation: React.FC<RevenueInformation> = ({
             <RevenueSlider revenue={otherRevenues} />
           </RevenueSections>
         </Container>
+        <Footer />
       </>
     );
   } else {

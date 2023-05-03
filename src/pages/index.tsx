@@ -26,6 +26,7 @@ import { RestaurantCard } from "@/components/RestaurantCard";
 import { restaurantMock } from "@/utils/mocks/restaurants";
 
 import { RevenueDTO } from "@/@types/revenue";
+import { Footer } from "@/components/Footer";
 
 type HomeScreenProps = {
   revenues: RevenueDTO[];
@@ -122,6 +123,7 @@ const Home: React.FC<HomeScreenProps> = (props) => {
           ))}
         </RestourantContent>
       </RestaurantsSection>
+      <Footer />
     </>
   );
 };
