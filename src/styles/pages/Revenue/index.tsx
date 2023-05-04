@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { IoTriangle } from "react-icons/io5";
 
 export const HeroSection = styled.div`
   position: relative;
@@ -100,7 +98,7 @@ export const MainSection = styled.section`
     padding: 0 2rem;
   }
   @media screen and (max-width: 350px) {
-    padding: 0;
+    padding: 0 1rem;
   }
 `;
 export const SearchContainer = styled.div`
@@ -111,96 +109,6 @@ export const SearchContainer = styled.div`
 `;
 
 export const CategoriesContainer = styled.div``;
-
-export const Dropdown = styled.div`
-  display: none;
-  align-items: center;
-  justify-content: flex-start;
-  background-color: ${({ theme }) => theme.colors.secundary};
-  color: ${({ theme }) => theme.colors.white};
-  padding: 0.5rem;
-  width: 220px;
-  font-size: 1.125rem;
-  position: relative;
-  text-transform: uppercase;
-  font-weight: 700;
-
-  @media screen and (max-width: 1060px) {
-    display: flex;
-  }
-`;
-export const IconContainer = styled.div`
-  display: flex;
-  width: 25%;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  height: 100%;
-  right: 0;
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
-  cursor: pointer;
-`;
-
-export const DropIcon = styled(IoTriangle)<{ open: boolean }>`
-  font-size: 1rem;
-  transform: rotate(${({ open }) => (open ? "0deg" : "180deg")});
-  transition: all 0.3s linear;
-`;
-export const DropdownList = styled(motion.ul)`
-  position: absolute;
-  top: 110%;
-  left: 0;
-  width: 100%;
-  z-index: 99;
-`;
-
-export const DropdownListItem = styled(motion.li)`
-  padding: 0.5rem;
-  width: 100%;
-  cursor: pointer;
-  background-color: ${({ theme }) => theme.colors.secundary};
-  display: flex;
-
-  cursor: pointer;
-  text-align: center;
-  border-bottom: 1px solid black;
-  :hover {
-    background-color: ${({ theme }) => theme.colors.primary};
-  }
-`;
-
-export const CategoryList = styled.ul`
-  display: flex;
-  gap: 1rem;
-
-  li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: ${({ theme }) => theme.colors.gray};
-    color: ${({ theme }) => theme.colors.secundary};
-    padding: 0.5rem 1rem;
-    text-transform: uppercase;
-    font-size: 1.125rem;
-    cursor: pointer;
-
-    :hover {
-      background-color: ${({ theme }) => theme.colors.grayHue};
-    }
-  }
-  .focus {
-    background-color: ${({ theme }) => theme.colors.secundary};
-    color: ${({ theme }) => theme.colors.white};
-    :hover {
-      background-color: ${({ theme }) => theme.colors.primary};
-    }
-  }
-
-  @media screen and (max-width: 1060px) {
-    display: none;
-  }
-`;
 
 export const RevenuesContent = styled.main`
   margin: 4rem 0;
