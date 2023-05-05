@@ -13,10 +13,31 @@ export const HeroSection = styled.section`
   display: flex;
   min-height: calc(100vh - 7.9rem);
   padding: 5rem 5rem;
+
+  @media screen and (max-width: 1150px) {
+    flex-direction: column;
+    padding: 3rem 2rem;
+  }
+  @media screen and (max-width: 500px) {
+    padding: 3rem 1rem;
+    align-items: center;
+    min-height: 100vh;
+  }
 `;
+
 export const ImageContainer = styled.div`
   position: relative;
   width: 40vw;
+
+  @media screen and (max-width: 1150px) {
+    height: 40vw;
+    width: 100%;
+    margin-bottom: 3rem;
+  }
+
+  @media screen and (max-width: 500px) {
+    height: 50vh;
+  }
 `;
 export const Image = styled(NextImage)`
   object-fit: cover;
@@ -29,12 +50,28 @@ export const InformationContainer = styled.div`
   flex-direction: column;
   padding: 0 0 0 4rem;
   gap: 2.5rem;
+
+  @media screen and (max-width: 1150px) {
+    width: 100%;
+    padding: 0;
+  }
+  @media screen and (max-width: 500px) {
+    margin-bottom: 2rem;
+    padding: 0;
+  }
 `;
 
 export const FoodNameTitle = styled.h2`
   font-size: 4rem;
   font-weight: 900;
   color: ${({ theme }) => theme.colors.secundary};
+
+  @media screen and (max-width: 700px) {
+    font-size: 3.5rem;
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 3rem;
+  }
 `;
 
 export const IngredientsCardContainer = styled.div`
@@ -44,30 +81,50 @@ export const IngredientsCardContainer = styled.div`
   height: max-content;
   border-radius: 1rem;
   padding: 1rem 2rem;
+
+  @media screen and (max-width: 500px) {
+    padding: 1rem 1rem;
+  }
 `;
 
 export const IngredientsTitle = styled.h3`
   color: ${({ theme }) => theme.colors.secundary};
   font-size: 2.5rem;
   margin-bottom: 1rem;
+
+  @media screen and (max-width: 500px) {
+    font-size: 2rem;
+  }
 `;
 
 export const IngredientItem = styled.div`
   display: flex;
   margin-bottom: 0.1rem;
+  align-items: center;
+
   .info:nth-child(2n) {
-    margin-right: 0.5rem;
+    margin: 0 0.5rem;
   }
   .info {
     color: ${({ theme }) => theme.colors.text};
     font-size: 1.5rem;
+  }
+
+  @media screen and (max-width: 500px) {
+    .info:nth-child(2n) {
+      font-size: 1.25rem;
+    }
+    .info {
+      font-size: 1rem;
+      word-wrap: keep-all;
+    }
+    margin-bottom: 0.4rem;
   }
 `;
 
 export const CheckItem = styled(MdCheck)`
   font-size: 2rem;
   color: ${({ theme }) => theme.colors.secundary};
-  margin-right: 0.5rem;
 `;
 
 export const SectionTitle = styled.h3`
@@ -75,6 +132,11 @@ export const SectionTitle = styled.h3`
   margin-bottom: 3rem;
   font-size: 3.25rem;
   font-weight: 900;
+
+  @media screen and (max-width: 500px) {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
 `;
 
 export const PreparationSection = styled.section`
@@ -82,6 +144,14 @@ export const PreparationSection = styled.section`
   padding: 2rem 5rem;
   min-height: 100vh;
   margin-bottom: 5rem;
+
+  @media screen and (max-width: 1150px) {
+    padding: 2rem 2rem;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 2rem 1rem;
+  }
 `;
 
 export const PreparationItem = styled.div`
@@ -104,11 +174,20 @@ export const PreparationStep = styled.span`
 export const PreparationStepDescription = styled.p`
   font-size: 1.25rem;
   font-weight: 700;
+  @media screen and (max-width: 500px) {
+    font-size: 1rem;
+  }
 `;
 
 export const PreparationCardContainer = styled.div`
   display: flex;
   margin-top: 4rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  @media screen and (max-width: 500px) {
+    margin-top: 2rem;
+  }
 `;
 
 export const PreparationCard = styled.div`
@@ -119,9 +198,14 @@ export const PreparationCard = styled.div`
   display: flex;
   align-items: center;
   margin-right: 3rem;
+
   .icon {
     font-size: 3rem;
     color: ${({ theme }) => theme.colors.secundary};
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 0.5rem 1rem;
   }
 `;
 
@@ -138,4 +222,11 @@ export const RevenueSections = styled.section`
   width: 100vw;
   background: ${({ theme }) => theme.colors.gray};
   padding: 3rem 0rem 3rem ${({ theme }) => theme.padding.rootPadding};
+
+  @media screen and (max-width: 1150px) {
+    padding: 2rem 0 2rem 2rem;
+  }
+  @media (max-width: 500px) {
+    padding: 2rem 1rem;
+  }
 `;

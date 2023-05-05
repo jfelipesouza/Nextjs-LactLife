@@ -70,6 +70,7 @@ const RevenueInformation: React.FC<RevenueInformation> = ({
               </IngredientsCardContainer>
             </InformationContainer>
           </HeroSection>
+
           <PreparationSection>
             <SectionTitle>Como Fazer:</SectionTitle>
             {revenue.preparation.map((e, index) => (

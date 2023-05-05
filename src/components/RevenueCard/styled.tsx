@@ -84,7 +84,7 @@ export const CardInformation = styled.div`
     padding: 1rem 0 2rem 0rem;
     padding-bottom: 1.5rem;
     align-items: flex-start;
-    z-index: 9;
+    z-index: 2;
     background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
     border-radius: 1rem;
     .foodName {

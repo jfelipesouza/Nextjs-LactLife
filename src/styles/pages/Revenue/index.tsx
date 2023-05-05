@@ -53,7 +53,7 @@ export const HeroSection = styled.div`
   }
 
   @media screen and (max-width: 450px) {
-    margin-top: 6.39rem;
+    margin-top: 6.3rem;
   }
   @media screen and (max-width: 350px) {
     #hero-section-question {
@@ -93,7 +93,6 @@ export const MainSection = styled.section`
   width: 100%;
   min-height: 100vh;
   padding: 0 ${({ theme }) => theme.padding.rootPadding};
-
   @media screen and (max-width: 750px) {
     padding: 0 2rem;
   }
@@ -166,5 +165,18 @@ export const ActionButton = styled.div`
   }
   :hover {
     background-color: ${({ theme }) => theme.colors.primary};
+  }
+
+  .icon-filter {
+    display: none;
+    font-size: 2rem;
+  }
+  @media screen and (max-width: 1060px) {
+    .icon {
+      display: none;
+    }
+    .icon-filter {
+      display: flex;
+    }
   }
 `;

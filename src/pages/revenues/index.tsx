@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import { IoSearchSharp } from "react-icons/io5";
+import { AiOutlineMenuUnfold } from "react-icons/ai";
 import axios from "axios";
 import Image from "next/image";
 
@@ -20,6 +21,7 @@ import {
   SearchContainer,
 } from "@/styles/pages/Revenue";
 import { CategoriesList } from "@/components/CategoriesList";
+import { SearchModal } from "@/components/SearchModal";
 
 type StaticRevenueScreenProps = {
   categories: ICategory[];
@@ -34,10 +36,15 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
 }) => {
   const [findRevenues, setFindRevenues] = useState(revenues);
   const [category, setCategory] = useState("");
+  const [openModal, setOpenModal] = useState(false);
 
   const handleSearchRevenuesByCategory = async (name: string) => {
     setCategory(name);
     console.log("categoria: " + name);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
   };
 
   return (
@@ -63,6 +70,7 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
           </>
         )}
       </HeroSection>
+
       <MainSection>
         <SearchContainer>
           <CategoriesContainer>
@@ -75,8 +83,9 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
           </CategoriesContainer>
           <SearchActionsContainer>
             <ActionButton>Adicionar receita +</ActionButton>
-            <ActionButton>
+            <ActionButton onClick={() => setOpenModal(true)}>
               <IoSearchSharp className={"icon"} />
+              <AiOutlineMenuUnfold className={"icon-filter"} />
             </ActionButton>
           </SearchActionsContainer>
         </SearchContainer>
@@ -91,6 +100,12 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
           ))}
         </RevenuesContent>
       </MainSection>
+
+      <SearchModal
+        closeModalFunction={handleCloseModal}
+        showModal={openModal}
+        categories={categories}
+      />
       <Footer />
     </>
   );
