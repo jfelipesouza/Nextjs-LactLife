@@ -93,6 +93,7 @@ export const MainSection = styled.section`
   width: 100%;
   min-height: 100vh;
   padding: 0 ${({ theme }) => theme.padding.rootPadding};
+  margin-bottom: 9rem;
   @media screen and (max-width: 750px) {
     padding: 0 2rem;
   }

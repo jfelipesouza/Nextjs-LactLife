@@ -160,7 +160,8 @@ export const QuestionLink = styled(Link)`
   font-size: 1.4rem;
   color: ${({ theme: { colors } }) => colors.white};
   border-radius: 0.4rem;
-
+  text-transform: uppercase;
+  font-weight: 700;
   :hover {
     background-color: ${({ theme: { colors } }) => colors.primary};
   }

@@ -1,30 +1,33 @@
-import React, { useEffect, useState } from 'react'
-import { MdStar } from 'react-icons/md'
+import React, { useEffect, useState } from "react";
+import { MdStar } from "react-icons/md";
 
-import { RestaurantDTO } from '@/@types/restaurant'
-import { CardImage, CardInformation, Container } from './styled'
+import { RestaurantDTO, Restaurants } from "@/@types/restaurant";
+import { CardImage, CardInformation, Container } from "./styled";
 
 type RestaurantCardProps = {
-  data: RestaurantDTO
-}
+  data: Restaurants;
+};
 
 export const RestaurantCard: React.FC<RestaurantCardProps> = ({ data }) => {
-  const [stars, setStars] = useState<{}[]>([])
+  const [stars, setStars] = useState<{}[]>([]);
 
   const returnStar = () => {
-    const addStars = []
+    const addStars = [];
     for (let index = 0; index < data.numberOfStar; index++) {
-      addStars.push({})
+      addStars.push({});
     }
-    setStars(addStars)
-  }
+    setStars(addStars);
+  };
   useEffect(() => {
-    returnStar()
-  }, [])
+    returnStar();
+  }, []);
 
   return (
-    <Container href={'/restaurants'}>
-      <CardImage alt={data.name} src={data.image} />
+    <Container>
+      <CardImage
+        alt={data.name}
+        src={`data:${data.image.mimeType};base64,${data.image.file}`}
+      />
       <CardInformation>
         <span className="restaurantName">{data.name}</span>
         <div className="stars">
@@ -34,5 +37,5 @@ export const RestaurantCard: React.FC<RestaurantCardProps> = ({ data }) => {
         </div>
       </CardInformation>
     </Container>
-  )
-}
+  );
+};

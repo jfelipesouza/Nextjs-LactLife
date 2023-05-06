@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { GetStaticProps, GetStaticPropsContext } from "next";
@@ -22,16 +22,20 @@ import {
   LocationOnIcon,
 } from "@/components/icons";
 import { RevenueSlider } from "@/components/RevenueSlider";
-import { RestaurantCard } from "@/components/RestaurantCard";
-import { restaurantMock } from "@/utils/mocks/restaurants";
 
 import { RevenueDTO } from "@/@types/revenue";
 import { Footer } from "@/components/Footer";
 
+import { Restaurants } from "@/@types/restaurant";
+import Link from "next/link";
+import { RestaurantCard } from "@/components/RestaurantCard";
+
 type HomeScreenProps = {
   revenues: RevenueDTO[];
+  restaurants: Restaurants[];
 };
-const Home: React.FC<HomeScreenProps> = (props) => {
+
+const Home: React.FC<HomeScreenProps> = ({ restaurants, revenues }) => {
   const informationCards = [
     {
       title: "Há níveis de intolerância?",
@@ -107,7 +111,7 @@ const Home: React.FC<HomeScreenProps> = (props) => {
           <SectionTilte href={"/revenues"}>Receitas</SectionTilte>
           <RestaurantIcon id={"icon"} />
         </SubtitleContainer>
-        <RevenueSlider revenue={props.revenues} />
+        <RevenueSlider revenue={revenues} />
         <ActionLink className="translate" id={"center"} href={"/revenues"}>
           Encontre a sua
         </ActionLink>
@@ -118,8 +122,10 @@ const Home: React.FC<HomeScreenProps> = (props) => {
           <LocationOnIcon id={"icon"} />
         </SubtitleContainer>
         <RestourantContent>
-          {restaurantMock.map((data) => (
-            <RestaurantCard data={data} key={data.id} />
+          {restaurants.map((data) => (
+            <Link href={"/restaurants/" + data.id}>
+              <RestaurantCard data={data} key={data.id} />
+            </Link>
           ))}
         </RestourantContent>
       </RestaurantsSection>
@@ -128,7 +134,7 @@ const Home: React.FC<HomeScreenProps> = (props) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<HomeScreenProps> = async (
+export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
   try {
@@ -141,11 +147,20 @@ export const getStaticProps: GetStaticProps<HomeScreenProps> = async (
       );
       return result.data.revenues;
     };
+
+    const getRestaurants = async () => {
+      const result = await axios.get(process.env.BASE_URL + "restaurants");
+      const data = [result.data.restaurants[0], result.data.restaurants[1]];
+      return data;
+    };
+
     const revenues = await getRevenues();
+    const restaurants = await getRestaurants();
 
     return {
       props: {
         revenues,
+        restaurants,
       },
       revalidate: 60 * 60, // will be passed to the page component as props
     };
@@ -153,6 +168,7 @@ export const getStaticProps: GetStaticProps<HomeScreenProps> = async (
     return {
       props: {
         revenues: [],
+        restaurants: [],
       },
       revalidate: 60 * 60, // will be passed to the page component as props
     };

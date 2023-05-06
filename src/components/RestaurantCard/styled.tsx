@@ -1,8 +1,8 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import styled from 'styled-components'
+import Image from "next/image";
+import Link from "next/link";
+import styled from "styled-components";
 
-export const Container = styled(Link)`
+export const Container = styled.div`
   height: 422.19px;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@ export const Container = styled(Link)`
   background-color: ${({ theme }) => theme.colors.gray};
   text-decoration: none;
   cursor: pointer;
-`
+`;
 
 export const CardImage = styled.img`
   width: 100%;
@@ -19,7 +19,7 @@ export const CardImage = styled.img`
   object-fit: cover;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-`
+`;
 export const CardInformation = styled.div`
   width: 100%;
   height: 20%;
@@ -47,4 +47,4 @@ export const CardInformation = styled.div`
       cursor: pointer;
     }
   }
-`
+`;

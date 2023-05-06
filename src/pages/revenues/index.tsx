@@ -40,7 +40,6 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
 
   const handleSearchRevenuesByCategory = async (name: string) => {
     setCategory(name);
-    console.log("categoria: " + name);
   };
 
   const handleCloseModal = () => {
