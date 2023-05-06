@@ -21,14 +21,6 @@ const RestaurantMap = dynamic(() => import("../../components/RestaurantMap"), {
   ssr: false,
 });
 
-type RestaurantDTO = {
-  id: string;
-  image: string;
-  name: string;
-  numberOfStar: number;
-  address: string;
-};
-
 type Restaurants = {
   id: string;
   name: string;
@@ -121,7 +113,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: paths || [],
-    fallback: true,
+    fallback: false,
   };
 };
 
