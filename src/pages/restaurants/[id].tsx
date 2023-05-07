@@ -7,6 +7,8 @@ import {
   LocalContainer,
   MainContainer,
   MapContainer,
+  RestaurantInfomation,
+  RestaurantInfomationItem,
   RestaurantWrapper,
   Title,
 } from "@/styles/pages/Restaurants";
@@ -16,6 +18,7 @@ import { mapApi } from "@/utils/axios";
 import { RestaurantCard } from "@/components/RestaurantCard";
 import { GetStaticPaths, GetStaticProps } from "next";
 import axios from "axios";
+import { MdStar } from "react-icons/md";
 
 const RestaurantMap = dynamic(() => import("../../components/RestaurantMap"), {
   ssr: false,
@@ -32,13 +35,15 @@ type Restaurants = {
   };
 };
 
-const RestaurantsScreens: React.FC<{
+const RestaurantsInformationScreens: React.FC<{
   restaurants: Restaurants[];
   restaurantFocus: string;
 }> = ({ restaurants, restaurantFocus }) => {
   const [focusRestaurant, setFocusRestaurant] = useState<Restaurants>(
     restaurants[0]
   );
+  const [stars, setStars] = useState<{}[]>([]);
+
   const [place, setPlace] = useState<Place>({
     id: "initial",
     location: { lat: 0, lon: 0 },
@@ -62,6 +67,13 @@ const RestaurantsScreens: React.FC<{
     setFocusRestaurant(restaurant);
   };
 
+  const returnStar = () => {
+    const addStars = [];
+    for (let index = 0; index < focusRestaurant.numberOfStar; index++) {
+      addStars.push({});
+    }
+    setStars(addStars);
+  };
   useEffect(() => {
     let restaurant: Restaurants | null = null;
     restaurants.forEach((value, index) => {
@@ -77,6 +89,7 @@ const RestaurantsScreens: React.FC<{
 
   useEffect(() => {
     searchMap();
+    returnStar();
   }, [focusRestaurant]);
 
   return (
@@ -84,15 +97,37 @@ const RestaurantsScreens: React.FC<{
       <Header />
       <MainContainer>
         <LocalContainer>
-          <Title>Locais</Title>
+          <Title id={"map"}>Locais</Title>
           <MapContainer>
             <RestaurantMap place={place} />
           </MapContainer>
+          <RestaurantInfomation>
+            <h2 className="title">Informações do Restaurante</h2>
+            <RestaurantInfomationItem>
+              <span> Nome: </span>
+              {focusRestaurant.name}
+            </RestaurantInfomationItem>
+            <RestaurantInfomationItem>
+              <span>Endereço: </span>
+              {focusRestaurant.address}
+            </RestaurantInfomationItem>
+            <RestaurantInfomationItem>
+              <span> Avaliação popular: </span>
+              <div style={{ display: "flex" }}>
+                {stars.map((star, index) => (
+                  <MdStar className="star" key={index} />
+                ))}
+              </div>
+            </RestaurantInfomationItem>
+          </RestaurantInfomation>
           <RestaurantWrapper>
             {restaurants.map((restaurant) => (
-              <div onClick={() => handleSelectRestaurant(restaurant)}>
+              <a
+                href={"#map"}
+                onClick={() => handleSelectRestaurant(restaurant)}
+              >
                 <RestaurantCard key={restaurant.id} data={restaurant} />
-              </div>
+              </a>
             ))}
           </RestaurantWrapper>
         </LocalContainer>
@@ -102,7 +137,7 @@ const RestaurantsScreens: React.FC<{
   );
 };
 
-export default RestaurantsScreens;
+export default RestaurantsInformationScreens;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await axios.get(process.env.BASE_URL + "restaurants");
