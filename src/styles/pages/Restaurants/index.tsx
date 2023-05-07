@@ -32,6 +32,10 @@ export const Title = styled.h2`
   font-size: 3rem;
   color: ${({ theme }) => theme.colors.secundary};
   font-weight: 900;
+
+  @media (max-width: 700px) {
+    font-size: 2.5rem;
+  }
 `;
 
 export const RestaurantInfomation = styled.div`
@@ -93,8 +97,8 @@ export const RestaurantWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
 
   @media (max-width: 850px) {
     grid-template-columns: repeat(1, 1fr);
@@ -112,9 +116,17 @@ export const RestaurantCard = styled.div`
 export const InformationContainer = styled.div`
   width: 100%;
   padding: 3rem 5rem;
+  @media (max-width: 700px) {
+    padding: 3rem 1rem;
+  }
 `;
 
 export const InformationTexts = styled.p`
   font-size: 1.5rem;
   font-weight: 600;
+  margin-top: 3rem;
+
+  @media (max-width: 700px) {
+    text-align: justify;
+  }
 `;
