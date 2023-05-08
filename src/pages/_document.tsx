@@ -45,7 +45,6 @@ export default class MyDocument extends Document {
         <Head lang="pt">
           <meta charSet="utf-8" />
 
-          <title>Lactose Online</title>
           <link
             rel="apple-touch-icon"
             sizes="180x180"

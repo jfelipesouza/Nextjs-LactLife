@@ -12,7 +12,7 @@ export const footerLinks = [
   {
     id: "comunity",
     title: "Comunidade",
-    ref: "/comunity",
+    ref: "/community",
   },
   {
     id: "quiz",

@@ -18,6 +18,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
           crossOrigin=""
         />
+
+        <title>Lactose Online</title>
       </Head>
       <ThemeProvider theme={ligthTheme}>
         <HeaderContextProvider>
