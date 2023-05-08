@@ -18,6 +18,7 @@ const NotFoundScreen: React.FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
+      alert("Você será redirecionado para a página anterior");
       redirect();
     }, INITIAL_TIME_TO_REDIRECT * 1000);
   }, []);
