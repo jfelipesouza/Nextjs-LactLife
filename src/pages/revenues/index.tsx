@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import { IoSearchSharp } from "react-icons/io5";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
@@ -22,6 +22,9 @@ import {
 } from "@/styles/pages/Revenue";
 import { CategoriesList } from "@/components/CategoriesList";
 import { SearchModal } from "@/components/SearchModal";
+import ModalFormRegisterOrLogin from "@/components/ModalFormRegisterOrLogin";
+import { useRouter } from "next/router";
+import { api } from "@/utils/axios";
 
 type StaticRevenueScreenProps = {
   categories: ICategory[];
@@ -34,12 +37,24 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
   revenues,
   banner,
 }) => {
+  const navigate = useRouter();
   const [findRevenues, setFindRevenues] = useState(revenues);
   const [category, setCategory] = useState("");
   const [openModal, setOpenModal] = useState(false);
+  const [modalRegister, setModalRegister] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   const handleSearchRevenuesByCategory = async (name: string) => {
     setCategory(name);
+    const { data } = await api.get("category/revenues", {
+      params: {
+        name: category,
+        start: 0,
+        end: 0,
+      },
+    });
+
+    setFindRevenues(data.revenues);
   };
 
   const handleCloseModal = () => {
@@ -105,6 +120,10 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
         showModal={openModal}
         categories={categories}
       />
+      <ModalFormRegisterOrLogin
+        visible={modalRegister}
+        closeModal={() => setModalRegister(false)}
+      />
       <Footer />
     </>
   );
@@ -143,7 +162,7 @@ export const getStaticProps: GetStaticProps<StaticRevenueScreenProps> = async (
       revenues,
       banner,
     },
-    revalidate: 60,
+    revalidate: 2,
   };
 };
 
