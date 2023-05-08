@@ -60,6 +60,10 @@ export const ChatCommunity: React.FC<ChatCommunityProps> = ({
     alert("erro");
   };
   const handleSendMessage = async (data: MessageForm) => {
+    if (data.message.trim() === "") {
+      const auth = sendMessageFunction();
+      return;
+    }
     const auth = sendMessageFunction();
     if (auth) {
       await handleConnectUserInRoom();
@@ -71,7 +75,6 @@ export const ChatCommunity: React.FC<ChatCommunityProps> = ({
   useEffect(() => {
     room.on("received_message", (data) => {
       setMessages((current) => [...current, data]);
-      console.log({ data });
     });
 
     room.on("numberOfUser", (number) => {
@@ -87,7 +90,7 @@ export const ChatCommunity: React.FC<ChatCommunityProps> = ({
   return (
     <ChatContainer>
       <ChatHeader>{usersOnline} online</ChatHeader>
-      <ChatMessagesContainer ref={ref as any}>
+      <ChatMessagesContainer>
         {messages.map((data, index) => (
           <ChatMessageItem
             invert={data.userId === authUser}

@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import { CommunityContainer, CommunityTitle } from "@/styles/pages/Community";
 import ModalFormRegisterOrLogin from "@/components/ModalFormRegisterOrLogin";
 import { ChatCommunity } from "@/components/ChatCommunity";
+import { Head } from "next/document";
 
 const CommunityScreen: React.FC = () => {
   const [chat, setChat] = useState<Socket>();

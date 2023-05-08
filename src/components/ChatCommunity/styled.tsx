@@ -26,7 +26,7 @@ export const ChatMessagesContainer = styled.div`
   flex-direction: column;
   overflow: auto;
   position: relative;
-  padding: 0 2rem;
+  padding: 0.5rem 2rem;
 `;
 
 export const ChatFootter = styled.form`
