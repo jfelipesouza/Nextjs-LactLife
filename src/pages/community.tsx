@@ -22,6 +22,7 @@ const CommunityScreen: React.FC = () => {
   };
 
   const isPossibilytySendMessage = () => {
+    console.log(sessionStorage.getItem("token"));
     if (!sessionStorage.getItem("token")) {
       setModalVisible(true);
       return false;

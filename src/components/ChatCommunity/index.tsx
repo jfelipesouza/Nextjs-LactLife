@@ -49,6 +49,7 @@ export const ChatCommunity: React.FC<ChatCommunityProps> = ({
     const token = sessionStorage.getItem("token");
     if (token) {
       const jwtDecode: { user: UserDTO } = jwt(token);
+      console.log(jwtDecode.user);
       setAuthUser(jwtDecode.user.id);
       const user = {
         userId: jwtDecode.user.id,
