@@ -66,6 +66,10 @@ export const ChatMessageItemText = styled.p<{ invert: boolean }>`
   max-width: 50%;
   background-color: ${({ theme }) => theme.colors.grayHue};
   font-size: 1.25rem;
+
+  @media (max-width: 700px) {
+    max-width: 100%;
+  }
 `;
 
 export const ChatSendMessageButton = styled.button`
