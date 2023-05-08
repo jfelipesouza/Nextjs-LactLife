@@ -37,24 +37,13 @@ const RevenueScreen: React.FC<StaticRevenueScreenProps> = ({
   revenues,
   banner,
 }) => {
-  const navigate = useRouter();
   const [findRevenues, setFindRevenues] = useState(revenues);
   const [category, setCategory] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [modalRegister, setModalRegister] = useState(false);
-  const [redirect, setRedirect] = useState(false);
 
   const handleSearchRevenuesByCategory = async (name: string) => {
     setCategory(name);
-    const { data } = await api.get("category/revenues", {
-      params: {
-        name: category,
-        start: 0,
-        end: 0,
-      },
-    });
-
-    setFindRevenues(data.revenues);
   };
 
   const handleCloseModal = () => {
@@ -138,7 +127,7 @@ export const getStaticProps: GetStaticProps<StaticRevenueScreenProps> = async (
   };
   const getAllrevenues = async (): Promise<RevenueDTO[]> => {
     const { data } = await axios.get(process.env.BASE_URL + "revenues", {
-      params: { minimun: false, start: 0, end: 10 },
+      params: { start: 0, end: 10 },
     });
     return data.revenues;
   };
@@ -162,7 +151,7 @@ export const getStaticProps: GetStaticProps<StaticRevenueScreenProps> = async (
       revenues,
       banner,
     },
-    revalidate: 2,
+    revalidate: 60,
   };
 };
 
